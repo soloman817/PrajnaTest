@@ -1,0 +1,3901 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>Prajna.Tools</name></assembly>
+<members>
+<member name="M:Prajna.Tools.Algorithm.WaterFilling(System.Int64[],System.Int64)">
+<summary>
+ Water filling algorithm implementation
+ First fulfilling the requirement of small value bins, and then move to bigger bins
+</summary>
+</member>
+<member name="F:Prajna.Tools.ArgumentParser.args">
+<summary>
+ Command line arguments to be used. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ArgumentParser.RemainingArgs">
+<summary>
+ Return remaining args that is unparsed. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.SetRegistryKeyStrings(System.String,System.String[],System.Char)">
+<summary>
+ Store a String[] of value to register key, concated with delimiter
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.SetRegistryKeyString(System.String,System.String)">
+<summary>
+ Store a key-value pair to windows register 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.SetRegistryKeyInt64(System.String,System.Int64)">
+<summary>
+ Store a value of int64 to register key
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.SetRegistryKeyInt(System.String,System.Int32)">
+<summary>
+ Store a value of int to register key
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.SetRegistryKeyFloat(System.String,System.Double)">
+<summary>
+ Store a value of double to register key
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.SetRegistryKeyBoolean(System.String,System.Boolean)">
+<summary>
+ Store a value of bool to register key
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.PrintUsage(System.String)">
+<summary>
+ print a usage statement, combined with default trace usage information. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseStrings(System.String,System.String[])">
+ <summary>
+ Parse a string[] argument, where multiple values The parameter can be set using -arg param1,param2,param3 where , is the delimiter, 
+ or using -arg param1 -arg param2 -arg param3
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseString(System.String,System.String)">
+ <summary>
+ Parse a string argument, with a supplied default value
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseInts(System.String,System.Int32[])">
+ <summary>
+ Parse a int[] argument, where multiple values can appear by using  -arg param1 -arg param2 -arg param3. 
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseInt64(System.String,System.Int64)">
+ <summary>
+ Parse a Int64 argument, with a supplied default value
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseInt(System.String,System.Int32)">
+ <summary>
+ Parse a int32 argument, with a supplied default value
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseFloat(System.String,System.Double)">
+ <summary>
+ Parse a double argument, with a supplied default value
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseDouble(System.String,System.Double)">
+ <summary>
+ Parse a float argument (double), with a supplied default value
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseBoolean(System.String,System.Boolean)">
+ <summary>
+ Parse a Boolean argument, with a supplied default value
+ <param name="arg"> pattern to arg </param>
+ <param name="defValue"> default value when pattern does not exist </param>
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgsString(System.String[],System.String,System.String)">
+
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgsInt64(System.String[],System.String,System.Int64)">
+
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgsInt(System.String[],System.String,System.Int32)">
+<summary>
+ Parse a command line argument of int32, if register does not exist, used the default value.
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgsFloat(System.String[],System.String,System.Double)">
+
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgsBoolean(System.String[],System.String,System.Boolean)">
+<summary>
+ Parse Boolean argument
+ use -option on|true|off|false
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgs``1(System.String[],System.String,``0,Microsoft.FSharp.Core.FSharpFunc{System.String,``0})">
+<summary>
+ To parse the commandline parameter related to traces for one parameters
+ ParseArgs args lookfor registername default_val :
+      if lookfor exists in args, then use the next param in args, mark both as &quot;&quot;, and 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgWinRegStrings(System.String,System.String,System.String[],System.Char[],Prajna.Tools.RegKeyOps)">
+ <summary>
+ Parse a string[] argument and optionally set the argument in Win32 register. The parameter can be set using -arg param1,param2,param3 where , is the delimiter, 
+ or using -arg param1 -arg param2 -arg param3
+ </summary>
+ <param name="arg"> pattern to be looked for in the command line argument, pattern matching is prefixed based and is case-insensitive </param>
+ <param name="regKey"> optional registration key to arg to get/set default parameter </param>
+ <param name="defVal"> default value if the pattern does not exist in the commandline argument </param>
+ <param name="delim"> delimiter to separate one argument into a string[] </param>
+ <param name="setKey"> If the value is Ignore, the register key is ignored. If the value is Read, an attempt is made to read the register key to retrieve the default value. 
+ If the value is ReadAndWrite, the register key is written if the commandline argument is presents.  </param>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgWinRegString(System.String,System.String,System.String,Prajna.Tools.RegKeyOps)">
+ <summary>
+ Parse a string argument and optionally set the argument in Win32 register
+ </summary>
+ <param name="arg"> pattern to be looked for in the command line argument, pattern matching is prefixed based and is case-insensitive </param>
+ <param name="regKey"> optional registration key to arg to get/set default parameter </param>
+ <param name="defVal"> default value if the pattern does not exist in the commandline argument </param>
+ <param name="setKey"> If the value is Ignore, the register key is ignored. If the value is Read, an attempt is made to read the register key to retrieve the default value. 
+ If the value is ReadAndWrite, the register key is written if the commandline argument is presents.  </param>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgWinRegInt64(System.String,System.String,System.Int64,Prajna.Tools.RegKeyOps)">
+ <summary>
+ Parse a int64 argument and optionally set the argument in Win32 register
+ </summary>
+ <param name="arg"> pattern to be looked for in the command line argument, pattern matching is prefixed based and is case-insensitive </param>
+ <param name="regKey"> optional registration key to arg to get/set default parameter </param>
+ <param name="defVal"> default value if the pattern does not exist in the commandline argument </param>
+ <param name="setKey"> If the value is Ignore, the register key is ignored. If the value is Read, an attempt is made to read the register key to retrieve the default value. 
+ If the value is ReadAndWrite, the register key is written if the commandline argument is presents.  </param>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgWinRegInt(System.String,System.String,System.Int32,Prajna.Tools.RegKeyOps)">
+ <summary>
+ Parse a int32 argument and optionally set the argument in Win32 register
+ </summary>
+ <param name="arg"> pattern to be looked for in the command line argument, pattern matching is prefixed based and is case-insensitive </param>
+ <param name="regKey"> optional registration key to arg to get/set default parameter </param>
+ <param name="defVal"> default value if the pattern does not exist in the commandline argument </param>
+ <param name="setKey"> If the value is Ignore, the register key is ignored. If the value is Read, an attempt is made to read the register key to retrieve the default value. 
+ If the value is ReadAndWrite, the register key is written if the commandline argument is presents.  </param>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgWinRegFloat(System.String,System.String,System.Double,Prajna.Tools.RegKeyOps)">
+ <summary>
+ Parse a double argument and optionally set the argument in Win32 register
+ </summary>
+ <param name="arg"> pattern to be looked for in the command line argument, pattern matching is prefixed based and is case-insensitive </param>
+ <param name="regKey"> optional registration key to arg to get/set default parameter </param>
+ <param name="defVal"> default value if the pattern does not exist in the commandline argument </param>
+ <param name="setKey"> If the value is Ignore, the register key is ignored. If the value is Read, an attempt is made to read the register key to retrieve the default value. 
+ If the value is ReadAndWrite, the register key is written if the commandline argument is presents.  </param>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ParseArgWinRegBoolean(System.String,System.String,System.Boolean,Prajna.Tools.RegKeyOps)">
+ <summary>
+ Parse a Boolean argument and optionally set the argument in Win32 register
+ </summary>
+ <param name="arg"> pattern to be looked for in the command line argument, pattern matching is prefixed based and is case-insensitive </param>
+ <param name="regKey"> optional registration key to arg to get/set default parameter </param>
+ <param name="defVal"> default value if the pattern does not exist in the commandline argument </param>
+ <param name="setKey"> If the value is Ignore, the register key is ignored. If the value is Read, an attempt is made to read the register key to retrieve the default value. 
+ If the value is ReadAndWrite, the register key is written if the commandline argument is presents.  </param>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.OpenRegistryPath(System.Boolean)">
+<summary>
+ attemp to open registry path    
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKeyStrings(System.String,System.String[],System.Char[])">
+<summary>
+ Read a register key of type String[] with a delimiter, if register does not exist, used the default value enclosed. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKeyString(System.String,System.String)">
+<summary>
+ Read a register key of type string, with a default value if register does not exist. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKeyInt64(System.String,System.Int64)">
+<summary>
+ Read a register key of type int64, if register does not exist, used the default value.
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKeyInt(System.String,System.Int32)">
+<summary>
+ Read a register key of type int, if register does not exist, used the default value. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKeyFloat(System.String,System.Double)">
+<summary>
+ Read a register key of type double, if register does not exist, used the default value.
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKeyBoolean(System.String,System.Boolean)">
+<summary>
+ Read a register key of type bool, if register does not exist, used the default value.
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.GetRegistryKey``1(System.String,``0,Microsoft.Win32.RegistryValueKind)">
+<summary>
+ Get Registry Key
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.ArgExists(System.String)">
+<summary>
+ Does a certain argument exists
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.AllParsed(System.String)">
+<summary>
+ Return true if all argument has been parsed, otherwise, return false, with usage stagement (including trace usage) printed. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ArgumentParser.#ctor(System.String[])">
+<summary>
+ Constructor that takes an array of string that represents the command line arguments
+</summary>
+</member>
+<member name="T:Prajna.Tools.ArgumentParser">
+ <summary>
+ Utility class to parse commandline argument. Each argument is in the form of -pattern param, and the programmer can supplied a default value for each parameter. Please note that the pattern is case insensitive prefix matched, so pattern
+ -dir will match "-directory" "-DIRECT". Please design your commandline argument pattern with different prefix. 
+ </summary>
+</member>
+<member name="T:Prajna.Tools.ArrAlign`1">
+<summary>
+ An array which maintains alignment in memory (for use by native code)
+ &lt;param name=&quot;size&quot;&gt;The number of elements of type &apos;T&lt;/param&gt;
+ &lt;param name=&quot;align&quot;&gt;The alignment required as number of bytes&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.BytesCompare.#ctor">
+<summary>
+ Construct a comparer for byte[] that compares their content. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.BytesCompare">
+ <summary>
+ Compare byte[], note that the default comparison of byte[] is Reference Equality 
+ </summary>
+</member>
+<member name="F:Prajna.Tools.CleanUp.Current@">
+<summary>
+ The default CleanUp structure to be used. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.CleanUp.Current(Prajna.Tools.CleanUp)">
+<summary>
+ The default CleanUp structure to be used. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.CleanUp.Current">
+<summary>
+ The default CleanUp structure to be used. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CleanUp.Unregister(System.Object)">
+<summary>
+ Just unhook clean up, do not call the clean up function as it is already been called. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CleanUp.Register``1(System.Int32,``0,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+ <summary> 
+ Register a clean up function, with the associated object, the cleanup function will be garanteed to called once. 
+ </summary> 
+ <param name="orderNumber"> An integer indicates that the object and its cleanup function will be called, the smaller the number, 
+     the earlier it will be disposed. </param>
+ <param name="o"> An object to be disposed. </param>
+ <param name="f"> The inner function of the object to be called for disposing the object. </param> 
+ <param name="infoFunc"> The information of the object being disposed. </param> 
+</member>
+<member name="M:Prajna.Tools.CleanUp.FindKey(System.Int32,System.Object)">
+<summary>
+ Find a key for the current disposable object. If already exist, find another key. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CleanUp.CleanUpOneObject(System.Object)">
+ <summary> 
+ Specifically clean up one object before hand. Object o should be registered previously. The function also doesn't trigger 
+ disposing of all other object. 
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.CleanUp.CleanUpAll">
+<summary>
+ Orderly clean up all objects. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.CleanUp">
+<summary>
+ CleanUp structure is used for system maintainenance, allow multiple systemwide disposable object to be disposed in an ordered way 
+ (e.g., threadpool is closed at last, after network queue has been shutdown, etc..)
+ The participated disposable object is usually systemwide static class (e.g., all queues, all wait handles, all thread pools, etc..)
+ Each systemwide disposable object (e.g., the static valuable attached to the object) should use Dispoable interface, and register its 
+ disposing function during construction at CleanUp.Register( orderNumber, o, f), where o is the object and f is the disposing function to be executed. 
+ The object&apos;s own disposing function then should contain 
+ CleanUp.CleanUpAll(), which garantees all objects to be cleaned up in an orderly fashion. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.CommonThread">
+ <summary> 
+ One common thread that once start, will continue to find items to work until jobs run out. 
+ This is like Task(), except we are implementing using our own Customized Thread Pool which we can control threadAffinity (don't have that in Task). 
+ </summary>
+</member>
+<member name="T:Prajna.Tools.ConcurrentArray`1">
+<summary>
+ Try implementing an array that can concurrently add/remove items 
+ Implementation hasn&apos;t worked out all thread safety issues. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.CustomizedDeserializerFunction">
+<summary>
+ Programmer will implementation CustomizedSerializerAction of Func&lt;MemStream, Object&gt; to customarily deserialize an object 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedMemoryManager.InstallMemoryManager(System.String,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Object},Microsoft.FSharp.Core.FSharpFunc{System.Int32,Microsoft.FSharp.Core.Unit})">
+ <summary>
+ Install a customized Memory Manager, in raw format of storage and no checking
+ </summary>
+ <param name="id"> Guid that uniquely identified the use of the serializer in the bytestream. The Guid is used by the deserializer to identify the need to 
+ run a customized deserializer function to deserialize the object. </param>
+ <param name="fullname"> Type name of the object. </param>
+ <param name="wrappedEncodeFunc"> Customized Serialization function that encodes an Object to a bytestream.  </param>
+</member>
+<member name="T:Prajna.Tools.CustomizedMemoryManager">
+ <summary>
+ Prajna allows user to implement customized memory manager. The corresponding class 'Type implement a 
+     allocFunc: () -> 'Type to grab an object of 'Type (from a pool of preallocated object). 
+     resetFunc: int -> () to return an object to the pool. 
+ Jin Li: This class is to be internalized, with a corresponding external implementation at JobDependencies. 
+ </summary> 
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.DecoderCollectionByGuid@">
+<summary>
+ Collection of Customized Serializer by Guid
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.DecoderCollectionByName@">
+<summary>
+ Collection of Customized Deserializer by name
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.EncoderCollectionByGuid@">
+<summary>
+ Collection of Customized Serializer by Guid
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.EncoderCollectionByName@">
+<summary>
+ Collection of Customized Serializer by name
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.MStreamSerializerGuid@">
+<summary>
+ Memstream[] serializer
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.DefaultSerializerGuid@">
+<summary>
+ Use default system serializer
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.ArrSerializerGuid@">
+<summary>
+ Byte[] serializer
+</summary>
+</member>
+<member name="F:Prajna.Tools.CustomizedSerialization.NullObjectGuid@">
+<summary>
+ For null boject
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.NullObjectGuid">
+<summary>
+ For null boject
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.MStreamSerializerGuid">
+<summary>
+ Memstream[] serializer
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.EncoderCollectionByName">
+<summary>
+ Collection of Customized Serializer by name
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.EncoderCollectionByGuid">
+<summary>
+ Collection of Customized Serializer by Guid
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.DefaultSerializerGuid">
+<summary>
+ Use default system serializer
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.DecoderCollectionByName">
+<summary>
+ Collection of Customized Deserializer by name
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.DecoderCollectionByGuid">
+<summary>
+ Collection of Customized Serializer by Guid
+</summary>
+</member>
+<member name="P:Prajna.Tools.CustomizedSerialization.ArrSerializerGuid">
+<summary>
+ Byte[] serializer
+</summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.WriteNull(System.IO.Stream)">
+ <summary> 
+ Write a Null Guid to bytestream
+ </summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.PeekIfNull(System.IO.Stream)">
+ <summary>
+ Peak next 16B (GUID), and check if the result is null.
+ </summary>
+ <returns> true if null has been serialized </returns>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.InstallSerializerDelegate(System.Guid,System.String,System.Action{System.Tuple{System.Object,System.IO.Stream}},System.Boolean)">
+ <summary> 
+ InstallSerializerDelegate allows language other than F# to install its own type serialization implementation. 
+ </summary> 
+ <param name="id"> Guid, that uniquely identifies the serializer/deserializer installed. </param>
+ <param name="fulltypename"> Type.FullName that captures object that will trigger the serializer. 
+         please note that the customized serializer/deserializer will not be triggered on the derivative type. You may need to install additional 
+         serializer if multiple derivative type share the same customzied serializer/deserializer. </param>
+ <param name="del"> An action delegate that perform the serialization function. </param>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.InstallSerializer(System.Guid,System.String,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Object,System.IO.Stream},Microsoft.FSharp.Core.Unit},System.Boolean)">
+ <summary>
+ Install a customized serializer, in raw format of storage and no checking
+ </summary>
+ <param name="id"> Guid that uniquely identified the use of the serializer in the bytestream. The Guid is used by the deserializer to identify the need to 
+ run a customized deserializer function to deserialize the object. </param>
+ <param name="fullname"> Type name of the object. </param>
+ <param name="wrappedEncodeFunc"> Customized Serialization function that encodes an Object to a bytestream.  </param>
+ <param name="bInstallAsDefault"> If true, the installed serializer will be used for default serialization.  </param>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.InstallSerializer``1(System.Guid,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{``0,System.IO.Stream},Microsoft.FSharp.Core.Unit},System.Boolean)">
+ <summary>
+ Install a customized serializer, with a unique GUID that identified the use of the serializer in the bytestream. 
+ </summary>
+ <param name="id"> Guid that uniquely identified the use of the serializer in the bytestream. The Guid is used by the deserializer to identify the need to 
+ run a customized deserializer function to deserialize the object. </param>
+ <param name="encodeFunc"> Customized Serialization function that encodes the 'Type to a bytestream.  </param>
+ <param name="bInstallAsDefault"> If true, the installed serializer will be used for default serialization.  </param>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.InstallDeserializerDelegate(System.Guid,System.String,System.Func{System.IO.Stream,System.Object})">
+ <summary> 
+ InstallDeserializerDelegate allows language other than F# to install its own type deserialization implementation. 
+ </summary> 
+ <param name = "id"> Guid, that uniquely identifies the serializer/deserializer installed. </param>
+ <param name = "fulltypename"> Type.FullName that captures object that will trigger the serializer. 
+         please note that the customized serializer/deserializer will not be triggered on the derivative type. You may need to install additional 
+         serializer if multiple derivative type share the same customzied serializer/deserializer </param>
+ <param name = "del"> A function delegate that perform the deserialization function. </param>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.InstallDeserializer(System.Guid,System.String,Microsoft.FSharp.Core.FSharpFunc{System.IO.Stream,System.Object})">
+ <summary>
+ Install a customized serializer, in raw format of storage and no checking
+ </summary>
+ <param name="id"> Guid that uniquely identified the use of the serializer in the bytestream. The Guid is used by the deserializer to identify the need to 
+ run a customized deserializer function to deserialize the object. </param>
+ <param name="fullname"> Type name of the object. </param>
+ <param name="wrappedDecodeFunc"> Customized Deserialization function that decodes the bytestream to object. </param>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.InstallDeserializer``1(System.Guid,Microsoft.FSharp.Core.FSharpFunc{System.IO.Stream,``0})">
+ <summary>
+ Install a customized deserializer, with a unique GUID that identified the use of the deserializer in the bytestream. 
+ </summary>
+ <param name="id"> Guid that uniquely identified the deserializer in the bytestream. </param>
+ <param name="decodeFunc"> Customized Deserialization function that decodes bytestream to 'Type.  </param>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.GetInstalledSchemaID``1">
+<summary>
+ Get the Installed Serializer SchemaID of a certain type 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.GetInstalledSchemaID(System.String)">
+<summary>
+ Get the Installed Serializer SchemaID of a certain type 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.BinaryFormatterSerializeFromTypeName``1(System.IO.Stream,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.IO.MemoryStream},Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Byte[],System.Int32,System.Int32,System.Boolean,System.Boolean},System.IO.MemoryStream},``0,System.String)">
+ <summary> 
+ Serialize a particular object to bytestream using BinaryFormatter, support serialization of null.  
+ </summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.BinaryFormatterDeserializeToTypeName(System.IO.Stream,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.IO.MemoryStream},Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Byte[],System.Int32,System.Int32,System.Boolean,System.Boolean},System.IO.MemoryStream},System.String)">
+ <summary> 
+ Deserialize a particular object from bytestream using BinaryFormatter, support serialization of null.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.AlternateSerializerID(System.Guid)">
+<summary>
+ A schema has been requested, the deserializer of the particular schema hasn&apos;t been installed, 
+ However, the developer has claimed that an alternative deserializer (of a different schema) will be able to handle the deserialization of the object. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.CustomizedSerialization.AlternateDeserializerID(System.Guid)">
+<summary>
+ A schema has been requested, the deserializer of the particular schema hasn&apos;t been installed, 
+ However, the developer has claimed that an alternative deserializer (of a different schema) will be able to handle the deserialization of the object. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.CustomizedSerialization">
+ <summary>
+ In Prajna, except closure serialization, user may install a customized encoder/decoder to serialize data, to make serialization/deserialization more efficient
+ Jin Li: This class is internal, with a corresponding external interface to be accessed at JobDependencies. 
+ </summary> 
+</member>
+<member name="T:Prajna.Tools.CustomizedSerializerAction">
+<summary>
+ Programmer will implementation CustomizedSerializerAction of Action&lt;Object*Stream&gt; to customarily serialize an object 
+</summary>
+</member>
+<member name="F:Prajna.Tools.DefaultLogger.usage">
+<summary>
+ Return usage information for ParseArguments
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExecuteEveryTriggerIncorrect`1.Trigger(`0,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+ <summary> 
+ Trigger the delegate collection once, with a certain trigger function. 
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ExecuteEveryTriggerIncorrect`1.Add(System.Action{`0},System.String)">
+ <summary> 
+ Register a delegate with of Action &lt;'U>
+ </summary> 
+ <param name="del"> Action &lt;'U> to be called when Trigger() is called </param>
+ <param name="info"> A string that provides trace information on the Action delegate registered </param>
+</member>
+<member name="M:Prajna.Tools.ExecuteEveryTriggerIncorrect`1.Add(System.Action{`0},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+ <summary> 
+ Register a delegate with of Action &lt;'U>
+ </summary> 
+ <param name="del"> Action &lt;'U> to be called when Trigger() is called </param>
+ <param name="infoFunc"> An informational functional delegate that provides trace information on the Action delegate registered </param>
+</member>
+<member name="T:Prajna.Tools.ExecuteEveryTriggerIncorrect`1">
+ <summary> 
+ Note: this lock-free version was not implemented correctly. Kept the code for future investigation
+ ExecuteEveryTrigger holds a collection of delegate, each of the delegate will be called once when Trigger() is called by one parameter 'U. 
+ We keep track of Trigger parameter 'U until a grace period (default 1sec). After 1sec after the class is constructed, we don't keep track of 'U that is beein called before, to release
+ reference point hold by 'U.  
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ExecuteEveryTrigger`1.Trigger(`0,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+ <summary> 
+ Trigger the delegate collection once, with a certain trigger function. 
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.ExecuteEveryTrigger`1.Add(System.Action{`0},System.String)">
+ <summary> 
+ Register a delegate with of Action &lt;'U>
+ </summary> 
+ <param name="del"> Action &lt;'U> to be called when Trigger() is called </param>
+ <param name="info"> A string that provides trace information on the Action delegate registered </param>
+</member>
+<member name="M:Prajna.Tools.ExecuteEveryTrigger`1.Add(System.Action{`0},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+ <summary> 
+ Register a delegate with of Action &lt;'U>
+ </summary> 
+ <param name="del"> Action &lt;'U> to be called when Trigger() is called </param>
+ <param name="infoFunc"> An informational functional delegate that provides trace information on the Action delegate registered </param>
+</member>
+<member name="T:Prajna.Tools.ExecuteEveryTrigger`1">
+ <summary> 
+ Note: this lock-free version was not implemented correctly. Kept the code for future investigation
+ ExecuteEveryTrigger holds a collection of delegate, each of the delegate will be called once when Trigger() is called by one parameter 'U. 
+ We keep track of Trigger parameter 'U until a grace period (default 1sec). After 1sec after the class is constructed, we don't keep track of 'U that is beein called before, to release
+ reference point hold by 'U.  
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ExecuteUponOnce.Trigger">
+<summary>
+ Execute the registered delegates (the registration can happen before or after trigger is called). 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExecuteUponOnce.Add(System.Action)">
+<summary>
+ Register a Action delegate. All registered delegates will be garanteed to be called once after Trigger() is called. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.ExecuteUponOnce">
+ <summary> 
+ ExecuteUponOnce holds a collection of delegate, each of the delegate will be garanteed to be called once after Trigger() is called. 
+ </summary>
+</member>
+<member name="F:Prajna.Tools.ExpandableBuffer.DefaultReadStreamBlockLength@">
+<summary>
+ If using Expandable buffer to read stream, the chunk size used to readin stream data 
+</summary>
+</member>
+<member name="F:Prajna.Tools.ExpandableBuffer.ExtensionFunc@">
+<summary>
+ Buffer Length extension: 
+ It should be a strict monotonically increasing function so that x &lt; y and f(x) &lt; f(y), and x &lt; f(x)
+</summary>
+</member>
+<member name="F:Prajna.Tools.ExpandableBuffer.Tail@">
+<summary>
+ Tail position
+</summary>
+</member>
+<member name="F:Prajna.Tools.ExpandableBuffer.Head@">
+<summary>
+ Head position
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.Tail(System.Int32)">
+<summary>
+ Tail position
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.Head(System.Int32)">
+<summary>
+ Head position
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.ExtensionFunc(Microsoft.FSharp.Core.FSharpFunc{System.Int32,System.Int32})">
+<summary>
+ Buffer Length extension: 
+ It should be a strict monotonically increasing function so that x &lt; y and f(x) &lt; f(y), and x &lt; f(x)
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.DefaultReadStreamBlockLength(System.Int32)">
+<summary>
+ If using Expandable buffer to read stream, the chunk size used to readin stream data 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.Tail">
+<summary>
+ Tail position
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.Length">
+<summary>
+ Length of the buffer
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.Head">
+<summary>
+ Head position
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.ExtensionFunc">
+<summary>
+ Buffer Length extension: 
+ It should be a strict monotonically increasing function so that x &lt; y and f(x) &lt; f(y), and x &lt; f(x)
+</summary>
+</member>
+<member name="P:Prajna.Tools.ExpandableBuffer.DefaultReadStreamBlockLength">
+<summary>
+ If using Expandable buffer to read stream, the chunk size used to readin stream data 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.TryExtendTail(System.Int32)">
+<summary>
+ Try extend the buffer at tail by len byte
+ do not move the tail pointer. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.TryExtendHead(System.Int32)">
+<summary>
+ Extend the buffer at head by len byte
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.ReadStreamToBuffer(System.IO.Stream)">
+<summary>
+ Read stream into an expandable buffer
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.ReadStream(System.IO.Stream,System.Int32)">
+<summary>
+ Read All stream into an expandable buffer
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.GetTruncatedBuffer">
+<summary>
+ Return a buffer (as a new Object)
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.GetBufferTuple">
+ <summary>
+ Get Buffer with position and length
+ Return:
+ buf: byte[]
+ start: start position
+ len: length of the valid buffer
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.GetBufferAfterTail">
+<summary>
+ Get Buffer at tail 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.ExtendTail(System.Int32)">
+<summary>
+ Extend the buffer at tail by len byte, move the Tail pointer. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.ExtendHead(System.Int32)">
+<summary>
+ Extend the buffer at head by len byte, move the Head pointer. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.#ctor(System.Int32,System.Int32)">
+ <summary> Create an expandable buffer of a certain size, and a position at zero. The buffer can be extended both at head and at tail </summary> 
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.#ctor(System.Int32)">
+ <summary> Create an expandable buffer of a certain size, with a default position at zero </summary> 
+</member>
+<member name="M:Prajna.Tools.ExpandableBuffer.#ctor">
+ <summary> Create an expandable buffer of default size </summary> 
+</member>
+<member name="T:Prajna.Tools.ExpandableBuffer">
+<summary>
+ ExpandableBuffer wraps around a bytearray object that can be extended in both direction, front &amp; back
+ The valid bytes in the Buffer is between Head &amp; Tail. 
+ The current implementation of expandableBuffer is not threadsafe, and should not be used in multiple thread environment. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.FuncUtil">
+<summary>
+ Convert System.Func to FSharpFunc
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.ParseArgs(System.String[])">
+<summary>
+ Parse arguments that configs the behavior of the LoggerProvider
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.Log(System.String,Prajna.Tools.LogLevel,System.String)">
+<summary>
+ Takes three parameters: log id, log level, log Message
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.Log(Prajna.Tools.LogLevel,System.String)">
+<summary>
+ Takes two parameters: log level, log Message
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.IsEnabled(System.String,Prajna.Tools.LogLevel)">
+<summary>
+ For the specifed &quot;log id&quot;, whether the specified &quot;log level&quot; is enabled
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.GetLogFile">
+<summary>
+ Return latest log entries as a file (It&apos;s up to the provider to decide whether to return a file and how many entries to return)
+ Returns &quot;null&quot; if the provider has no such capability
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.GetArgsUsage">
+<summary>
+ Print the usage information on string arguments that ParseArgs can parse for the LoggerProvider
+</summary>
+</member>
+<member name="M:Prajna.Tools.ILoggerProvider.Flush">
+<summary>
+ Flush the pending log entries
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.ExtremeVerbose">
+<summary>
+ WildVerbose, extreme detailed execution trace (serious impact on performance, not commonly used. )
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.WildVerbose">
+<summary>
+ WildVerbose, detailed execution trace (non-trival impact on performance, usually used during intensive debugging of a hard to fix bug. )
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.MediumVerbose">
+<summary>
+ MildVerbose, extra information (may slightly impact performance.)
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.MildVerbose">
+<summary>
+ MildVerbose, additional information (usually won&apos;t seriously impact performance, during test, Prajna is operated at this trace level. )
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.Info">
+<summary>
+ Information, normally be outputed (default trace level is Info)
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.Warning">
+<summary>
+ Warning, should always be outputed. 
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.Error">
+<summary>
+ Error/exception messgae, should always be outputed. 
+</summary>
+</member>
+<member name="F:Prajna.Tools.LogLevel.Fatal">
+<summary>
+ Fatal error
+</summary>
+</member>
+<member name="T:Prajna.Tools.LogLevel">
+ <summary> 
+ Prajna Trace level, the lower the level, the more important of the message. 
+ </summary>
+</member>
+<member name="F:Prajna.Tools.Logger.DefaultLogId@">
+<summary>
+ Default log id
+</summary>
+</member>
+<member name="P:Prajna.Tools.Logger.LoggerProvider(Prajna.Tools.ILoggerProvider)">
+<summary>
+ The logger provider that is used for logging
+</summary>
+</member>
+<member name="P:Prajna.Tools.Logger.LoggerProvider">
+<summary>
+ The logger provider that is used for logging
+</summary>
+</member>
+<member name="P:Prajna.Tools.Logger.DefaultLogId">
+<summary>
+ Default log id
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.ParseArgs(System.String[])">
+<summary>
+ Parse the arguments that configure the behavior of the logger
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.LogStackTrace(System.String,Prajna.Tools.LogLevel)">
+<summary>
+ Log stack trace with &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.LogStackTrace(Prajna.Tools.LogLevel)">
+<summary>
+ Log stack trace if logLevel &lt;= Logger.DefaultLogLevel
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.Log(System.Guid,Prajna.Tools.LogLevel,System.String)">
+<summary>
+ Log &quot;message&quot; using &quot;jobID&quot;                                                              
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.Log(System.String,System.Guid,Prajna.Tools.LogLevel,System.String)">
+<summary>
+ Log &quot;message&quot; using &quot;logId&quot; and jobID
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.Log(System.String,Prajna.Tools.LogLevel,System.String)">
+<summary>
+ Log &quot;message&quot; using &quot;logId&quot;                                                              
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.Log(Prajna.Tools.LogLevel,System.String)">
+<summary>
+ Log &quot;message&quot; if logLevel &lt;= Logger.DefaultLogLevel                                                                    
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.GetLogFile">
+<summary>
+ Return a file that contains the latest log entries
+</summary>
+</member>
+<member name="M:Prajna.Tools.Logger.Flush">
+<summary>
+ Flush the pending log entries
+</summary>
+</member>
+<member name="T:Prajna.Tools.Logger">
+<summary>
+ Logger
+</summary>
+</member>
+<member name="F:Prajna.Tools.OneCleanUp.CleanUpThisOnly@">
+<summary>
+ CleanUpThisOnly() should be called if the object o needs to be disposed early 
+</summary>
+</member>
+<member name="F:Prajna.Tools.OneCleanUp.CleanUpFunc@">
+<summary>
+ Providing information of the cleanup object
+</summary>
+</member>
+<member name="P:Prajna.Tools.OneCleanUp.CleanUpThisOnly">
+<summary>
+ CleanUpThisOnly() should be called if the object o needs to be disposed early 
+</summary>
+</member>
+<member name="P:Prajna.Tools.OneCleanUp.CleanUpFunc">
+<summary>
+ Providing information of the cleanup object
+</summary>
+</member>
+<member name="T:Prajna.Tools.OneCleanUp">
+<summary>
+ Structure associated with CleanUp, only used if the class need to clean up the class early. 
+ If that is the case, call CleanUpThisOnly()
+</summary>
+</member>
+<member name="M:Prajna.Tools.RandomWithSalt.#ctor(System.Int32)">
+<summary>
+ Construct Random() class with a salt, so that different random generator seed is used in a multithread environment. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.RandomWithSalt">
+<summary>
+ This class is created for initialization of Random(), in which the 
+ Random generator can be correlated as they have the same time signature. A salt is added to make sure that the 
+ resultant random number is different based on different salt value. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.ReferenceComparer`1">
+ <summary>
+ Construct a comparer that uses Object.ReferenceEquals to compare object. 
+ </summary>
+</member>
+<member name="F:Prajna.Tools.RegKeyOps.ReadAndWrite">
+<summary>
+ Read register key &amp; write back the content as default argument after parsing
+</summary>
+</member>
+<member name="F:Prajna.Tools.RegKeyOps.Read">
+<summary>
+ Read register key if exist 
+</summary>
+</member>
+<member name="F:Prajna.Tools.RegKeyOps.Ignore">
+<summary>
+ Do not use register key 
+</summary>
+</member>
+<member name="T:Prajna.Tools.RegKeyOps">
+<summary>
+ Register key usage control  
+</summary>
+</member>
+<member name="T:Prajna.Tools.SafeCTSToken">
+<summary>
+ A cancellation Token which is the dual of SafeCTSWrapper
+</summary>
+</member>
+<member name="P:Prajna.Tools.SafeCTSWrapper.Token">
+<summary>
+ Gets whether cancellation has been requested
+</summary>
+</member>
+<member name="P:Prajna.Tools.SafeCTSWrapper.IsDisposed">
+<summary>
+ For Testing purpose only, has the CTS structure been disposed?
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.DecrementAndCheckForDisposeCTS">
+<summary>
+ Decrement and check for DisposeCTS
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.CancelAfter(System.TimeSpan)">
+<summary>
+ Schedules a cancel operation on this CancellationTokenSource after the specified number of milliseconds.
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.CancelAfter(System.Int32)">
+<summary>
+ Schedules a cancel operation on this CancellationTokenSource after the specified number of milliseconds.
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.Cancel(System.Boolean)">
+<summary>
+ Communicates a request for cancellation, and specifies whether remaining callbacks and cancelable operations should be processed.
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.Cancel">
+<summary>
+ Communicates a request for cancellation.
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.#ctor(System.Int32)">
+<summary>
+ Initializes a new instance of the CancellationTokenSource class that will be canceled after the specified delay in milliseconds.
+</summary>
+</member>
+<member name="M:Prajna.Tools.SafeCTSWrapper.#ctor">
+<summary>
+ Initializes a new instance of the SafeCTSWrapper class.
+</summary>
+</member>
+<member name="T:Prajna.Tools.SafeCTSWrapper">
+<summary>
+ A safe wrapper for CancellationTokenSource, for the secure disposale of CancellationTokenSource object. 
+ When the SafeCTSWrapper is cancelled, the associated CancellationTokenSource is cancelled, and 
+ after all jobs exit, the CancellationTokenSource will be disposed. 
+ SafeCTSWrapper is not mean to be disposed itself, as that will cause .Token property to fails. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.SafeRefCnt`1.Elem">
+<summary>
+ Obtain element contained wit
+</summary>
+</member>
+<member name="M:Prajna.Tools.SingleCreation`1.Object">
+<summary>
+ Access the object constructed by Create() function. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.SingleCreation`1.Destroy(Microsoft.FSharp.Core.FSharpFunc{`0,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Destroy the object by calling a deallocation function destroyFunc. The destroyFunc is garanteed to be called only once.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.SingleCreation`1.Create(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,`0})">
+<summary>
+ Create an object via the execution of an initFunc. SingleCreation garantees that the  initFunc is only called upon once in a multithread environment to construct an object. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.SingleCreation`1">
+<summary>
+ SingleCreation&lt;&apos;U&gt; holds a single object &apos;U, and garantees that the creation function and destroy function is only called once. 
+ At time of init, the class garantees that initFunc will be called once to create the instance. At the time of 
+ destruction, the class also garantees that the destroyFunc is called once to destroy the instance. 
+</summary>
+</member>
+<member name="F:Prajna.Tools.SpinLockSlim.Tracking">
+<summary>
+ Whether tracking thread
+</summary>
+</member>
+<member name="F:Prajna.Tools.SpinLockSlim.LockValue">
+<summary>
+ Lock Value used by SpinLockSlim, using 1 if not tracking thread, and managed thread ID if tracking thread
+</summary>
+</member>
+<member name="P:Prajna.Tools.SpinLockSlim.IsHeld">
+<summary>
+ ture if lock is being held
+</summary>
+</member>
+<member name="M:Prajna.Tools.SpinLockSlim.TryEnterInternal(System.Int32)">
+ <summary>
+ Internal function of acquiring a lock
+ </summary>
+</member>
+<member name="M:Prajna.Tools.SpinLockSlim.TryEnter">
+ <summary>
+ Attempts to acquire the lock. The return value indicates whether it has been acquired or not
+ </summary>
+</member>
+<member name="M:Prajna.Tools.SpinLockSlim.GetID">
+<summary>
+ if tracking thread, return the ManagedThreadId, otherwise, always return 1
+</summary>
+</member>
+<member name="M:Prajna.Tools.SpinLockSlim.Exit">
+ <summary>
+ Releases the lock.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.SpinLockSlim.Enter">
+ <summary>
+ Acquire a lock 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.SpinLockSlim.#ctor(System.Boolean)">
+<summary>
+ Initialize a SpinLockSlim, if bTracking is true, the threadID of the locking thread will be used in tracking
+</summary>
+</member>
+<member name="T:Prajna.Tools.SpinLockSlim">
+ <summary>
+ SpinLockSlim is similar to SpinLock, but with lower overhead. It also corrects some bugs in SpinLock in which it fails to lock the area of access. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.SerializeObjectWithTypeName(Prajna.Tools.StreamBase{System.Byte},System.Object)">
+ <summary>
+ Serialize a particular object to bytestream, allow use of customizable serializer if one is installed. 
+ The customized serializer is of name obj.GetType().FullName. 
+ </summary> 
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.SerializeObjectWithSchema(Prajna.Tools.StreamBase{System.Byte},System.Object,System.Guid)">
+ <summary> 
+ Serialize a particular object to bytestream, using a particular schema
+ If obj is null, it is serialized to a specific reserved NullObjectGuid for null. 
+ </summary>
+ <param name="obj"> Object to be serialized </param> 
+ <param name="schemaID"> schema used to serialize the object </param>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.SerializeFromWithTypeName``1(Prajna.Tools.StreamBase{System.Byte},``0)">
+<summary>
+ Serialize a particular object to bytestream, allow use of customizable serializer if one is installed. 
+ The customized serializer is of typeof&lt;&apos;U&gt;.FullName, even the object passed in is of a derivative type. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.SerializeFrom``1(Prajna.Tools.StreamBase{System.Byte},``0)">
+<summary>
+ Serialize a particular object to bytestream, allow use of customizable serializer if one is installed. 
+ The customized serializer is of typeof&lt;&apos;U&gt;.FullName, even the object passed in is of a derivative type. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.Serialize``2(Prajna.Tools.StreamBase{``0},``1)">
+<summary>
+ Serialize an object to bytestream with BinaryFormatter, support serialization of null. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.FormatterSerializeFromTypeName``2(Prajna.Tools.StreamBase{``0},``1,System.String,System.Runtime.Serialization.IFormatter)">
+ <summary> 
+ Serialize a particular object to bytestream using BinaryFormatter, support serialization of null.  
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.FormatterDeserializeToTypeName``1(Prajna.Tools.StreamBase{``0},System.String,System.Runtime.Serialization.IFormatter)">
+ <summary> 
+ Deserialize a particular object from bytestream using BinaryFormatter, support serialization of null.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.DeserializeTo``1(Prajna.Tools.StreamBase{System.Byte})">
+<summary>
+ x.BinaryFormatterSerializeFromTypeName( obj, typeof&lt;&apos;U&gt;.FullName )
+ Deserialize a particular object from bytestream, allow use of customizable serializer if one is installed.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.DeserializeObjectWithTypeName(Prajna.Tools.StreamBase{System.Byte})">
+<summary>
+ Deserialize a particular object from bytestream, allow use of customizable serializer if one is installed.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.DeserializeObjectWithSchema(Prajna.Tools.StreamBase{System.Byte},System.Guid)">
+ <summary> 
+ Deserialize a particular object from bytestream. 
+ A Guid is first read from bytestream, if it is a specific reserved NullObjectGuid, return object is null. 
+ Use installed customized deserailizer is used to deserialize the object. 
+ </summary>
+ <param name="obj"> Object to be serialized </param> 
+ <param name="fullname"> TypeName of the Object to be used to lookup for installed customizable serializer </param>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.Deserialize``1(Prajna.Tools.StreamBase{``0})">
+<summary>
+ Deserialize an object from bytestream with BinaryFormatter, support deserialization of null. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.CustomizableSerializeFromTypeName(Prajna.Tools.StreamBase{System.Byte},System.Object,System.String)">
+ <summary> 
+ Serialize a particular object to bytestream, allow use of customizable serializer if installed. 
+ If obj is null, it is serialized to a specific reserved NullObjectGuid for null. 
+ If obj is not null, and no customized serailizer is installed, the bytestream is written as DefaultSerializerGuid + BinaryFormatter() serialized bytestream. 
+ If obj is not null, and a customized serailizer is installed, the bytestream is written as GUID_SERIALIZER + content. 
+ </summary>
+ <param name="obj"> Object to be serialized </param> 
+ <param name="fullname"> TypeName of the Object to be used to lookup for installed customizable serializer </param>
+</member>
+<member name="M:Prajna.Tools.StreamBaseExtension.CustomizableDeserializeToTypeName(Prajna.Tools.StreamBase{System.Byte},System.String)">
+ <summary> 
+ Deserialize a particular object from bytestream, allow use of customizable serializer if installed. 
+ A Guid is first read from bytestream, if it is a specific reserved NullObjectGuid, return object is null. 
+ If the GUID is DefaultSerializerGuid, BinaryFormatter is used to deserialize the object. 
+ For other GUID, installed customized deserailizer is used to deserialize the object. 
+ </summary>
+ <param name="fullname"> Should always be null </param>
+</member>
+<member name="T:Prajna.Tools.StreamBaseExtension">
+<summary>
+ Extensions to StreamBase&lt;byte&gt; to allow for custom serialization
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBase`1.WriteIPEndPoint(System.Net.IPEndPoint)">
+<summary>
+ Write IPEndPoint to bytestream 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBase`1.ReadIPEndPoint">
+<summary>
+ Read IPEndPoint from bytestream, if the bytestream is truncated prematurely, the later IPAddress and port information will be 0. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBase`1.InsertBefore(Prajna.Tools.StreamBase{`0})">
+<summary>
+ Insert a second MemStream before the current MemStream, and return the resultant MemStream
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamBase`1.GetBufferPosLength">
+ <summary>
+ Return the buffer, position, count as a tuple that captures the state of the current MemStream. 
+ buffer: bytearray of the underlying bytestream. 
+ position: the current position if need to write out the bytestream. 
+ count: number of bytes if need to write out the bytestream. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteVInt32(System.IO.Stream,System.Int32)">
+<summary>
+ Write a int32 to bytestream with variable length coding (VLC). 
+ For value between -127..+127 -&gt; one byte is used to encode the int32
+ For other value              -&gt; 0x80 + 4Byte (5 bytes are used to encode the int32)
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteUInt64(System.IO.Stream,System.UInt64)">
+<summary>
+ Write a uint64 to bytestream.     
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteUInt32(System.IO.Stream,System.UInt32)">
+<summary>
+ Write a uint32 to bytestream. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteUInt16(System.IO.Stream,System.UInt16)">
+<summary>
+ Write a uint16 to bytestream.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteStringV(System.IO.Stream,System.String)">
+<summary>
+ Write a string (UTF8Encoded) to bytestream and prefix with a length (VLC coded) of the bytearray. 
+ If the string is null, the bytestream is written to indicate that is a string of length 0. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteString(System.IO.Stream,System.String)">
+<summary>
+ Write a string (UTF8Encoded) to bytestream and prefix with a length of the bytearray. 
+ If the string is null, the bytestream is written to indicate that is a string of length 0. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteSingle(System.IO.Stream,System.Single)">
+<summary>
+ Write a single float value to bytestream.     
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteJson``1(System.IO.Stream,``0)">
+<summary>
+ Write a json object to bytestream
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteInt64(System.IO.Stream,System.Int64)">
+<summary>
+ Write a int64 to bytestream.     
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteInt32(System.IO.Stream,System.Int32)">
+<summary>
+ Write a int32 to bytestream. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteInt16(System.IO.Stream,System.Int16)">
+<summary>
+ Write a int16 to bytestream. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteIPEndPoint(System.IO.Stream,System.Net.IPEndPoint)">
+<summary>
+ Write IPEndPoint to bytestream 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteGuid(System.IO.Stream,System.Guid)">
+<summary>
+ Write a Guid to bytestream. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteDouble(System.IO.Stream,System.Double)">
+<summary>
+ Write a double float value to bytestream.     
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteBytesWithOffset(System.IO.Stream,System.Byte[],System.Int32,System.Int32)">
+ <summary>
+ Writes a bytearray with offset and count to the current stream.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteBytesWVLen(System.IO.Stream,System.Byte[])">
+<summary>
+ Write a bytearray to bytestream and prefix with a length (VLC coded) of the bytearray. 
+ If the bytearray is null, the bytestream is written to indicate that is a bytearray of size 0. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteBytesWLen(System.IO.Stream,System.Byte[])">
+<summary>
+ Write a bytearray to bytestream and prefix with length of the bytearray. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteBytes(System.IO.Stream,System.Byte[])">
+<summary>
+ Writes a bytearray to the current stream.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.WriteBoolean(System.IO.Stream,System.Boolean)">
+<summary>
+ Write a boolean into bytestream, with 1uy represents true and 0uy represents false
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadVInt32(System.IO.Stream)">
+<summary>
+ Read a int32 from bytestream with variable length coding (VLC). 
+ For value between -127..+127 -&gt; one byte is used to encode the int32
+ For other value              -&gt; 0x80 + 4Byte (5 bytes are used to encode the int32)
+ If the end of the stream has been reached at the moment of read, ReadVInt32() will return 0. 
+ If at least one byte is read, but the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the high order bytes of int32 will be fillled with zero.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadUInt64(System.IO.Stream)">
+<summary>
+ Read a uint64 from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the high order bytes of uint64 will be fillled with zero.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadUInt32(System.IO.Stream)">
+<summary>
+ Read a uint32 from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the high order bytes of uint32 will be fillled with zero. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadUInt16(System.IO.Stream)">
+<summary>
+ Read a uint16 from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any bytes are read), the high order bytes of uint16 will be
+ fillled with zero.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadStringV(System.IO.Stream)">
+<summary>
+ Read a string (UTF8Encoded) from bytestream with prefix (VLC coded) of the bytearray. 
+ If the bytestream is truncated prematurely, the returned string will be &quot;&quot;  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadString(System.IO.Stream)">
+<summary>
+ Read a string (UTF8Encoded) from bytestream with prefix of the bytearray. 
+ If the bytestream is truncated prematurely, the returned string will be &quot;&quot;  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadSingle(System.IO.Stream)">
+<summary>
+ Read a single float value from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the late read bytes of single will be fillled with zero.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadJson``1(System.IO.Stream)">
+<summary>
+ Read a json object from bytestream
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadInt64(System.IO.Stream)">
+<summary>
+ Read a int64 from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the high order bytes of int64 will be fillled with zero.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadInt32(System.IO.Stream)">
+<summary>
+ Read a int32 from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the high order bytes of uint32 will be fillled with zero.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadInt16(System.IO.Stream)">
+<summary>
+ Read a int16 from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the high order bytes of int16 will be fillled with zero.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadIPEndPoint(System.IO.Stream)">
+<summary>
+ Read IPEndPoint from bytestream, if the bytestream is truncated prematurely, the later IPAddress and port information will be 0. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadGuid(System.IO.Stream)">
+<summary>
+ Read a Guid from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any bytes are read), the remainder of Guid will be
+ fillled with zero.  
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadDouble(System.IO.Stream)">
+<summary>
+ Read a double float value from bytestream. If the number of bytes that is currently available is less (or if the end of the stream is reached before any 
+ bytes are read), the late read bytes of double will be fillled with zero.
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadBytesWVLen(System.IO.Stream)">
+<summary>
+ Read a bytearray from bytestream that is prefixed with length of the bytearray. If the bytestream is truncated prematurely, the returned bytearray will be a bytearray of 
+ remainder of the bytestram. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadBytesWLen(System.IO.Stream)">
+<summary>
+ Read a bytearray from bytestream that is prefixed with length of the bytearray. If the bytestream is truncated prematurely, the returned bytearray will be a bytearray of 
+ remainder of the bytestram. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadBytesToEnd(System.IO.Stream)">
+<summary>
+ Attempt to read the remainder of the bytestream as a single bytearray. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadBytes(System.IO.Stream,System.Int32)">
+ <summary>
+ Read a bytearray of len bytes to the current stream. The function always return a bytearray of size len even if the number of bytes that is currently available is less (or even zero if the end of the stream is reached before any bytes are read). 
+ In such a case, the remainder of the bytearray is filled with zero. 
+ </summary>
+ <returns> A bytearray of size len. If the number of bytes that is currently available is less (or if the end of the stream is reached before any bytes are read), 
+ the remainder of the bytearray is filled with zero. 
+ </returns>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadBytes(System.IO.Stream,System.Byte[])">
+ <summary>
+ Read a bytearray from the current stream. The length of bytes to be read is determined by the size of the bytearray. 
+ </summary>
+ <param name="buf"> byte array to be read </param>
+ <returns> The total number of bytes written into the buffer. This can be less than the number of bytes requested if that number of bytes are not currently available, or zero if the end of the stream is reached before any bytes are read.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.StreamExtension.ReadBoolean(System.IO.Stream)">
+<summary>
+ Read a boolean from bytestream. If the end of the stream is reached, the function will return true.
+</summary>
+</member>
+<member name="T:Prajna.Tools.StreamExtension">
+<summary>
+ Extension Methods for System.IO.Stream
+</summary>
+</member>
+<member name="M:Prajna.Tools.StreamMonitor.AddMonitorFile(System.String)">
+ <summary> 
+ Add a file in which the output of the stream content will be written to
+ </summary> 
+</member>
+<member name="T:Prajna.Tools.StreamMonitor">
+ <summary>
+ class StreamMonitor is usually used to monitor a output stream (such as stderr, stdout), and perform one or more callback operation on new output observed. 
+ </summary>
+</member>
+<member name="T:Prajna.Tools.StreamMonitorAction">
+ <summary>
+ delegate StreamMonitorAction provides call back for StreamMonitor
+ The call back function takes two parameter: 
+ 1st: string that are read recently. 
+ 2nd: bool: whether the monitored stream has reached the end (thus should be closed). 
+ </summary>
+</member>
+<member name="T:Prajna.Tools.StreamMonitorToFile">
+ <summary>
+ Pipe the monitored content to a file.  
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StringExtension.WriteException(System.IO.Stream,System.Exception)">
+<summary>
+ Helper function to pack a remote exception 
+ See: http://blogs.msdn.com/b/brada/archive/2005/03/27/402801.aspx
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringExtension.ReadException(System.IO.Stream)">
+<summary>
+ Helper function to pack a remote exception 
+ See: http://blogs.msdn.com/b/brada/archive/2005/03/27/402801.aspx
+</summary>
+</member>
+<member name="T:Prajna.Tools.StringExtension">
+<summary>
+ Extension Methods for System.String
+</summary>
+</member>
+<member name="F:Prajna.Tools.StringTComparer`1._comp">
+<summary>
+  comparer of string used. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTComparer`1.#ctor(System.StringComparer)">
+<summary>
+ Constract a comparer that compares a tuple of String*&apos;T, in which &apos;T supports equality, and comp is a comparer of string
+</summary>
+</member>
+<member name="T:Prajna.Tools.StringTComparer`1">
+ <summary>
+ Construct a comparer to quick compare String*'T. 
+ The class is constructured to take a comparer of string, and a type T that supports equality, and construct a new comparer
+ </summary>
+</member>
+<member name="M:Prajna.Tools.SystemThreadPool.Exit">
+<summary>
+ Exit a blocking area            
+</summary>
+</member>
+<member name="M:Prajna.Tools.SystemThreadPool.Enter">
+<summary>
+ Enter a blocking area
+</summary>
+</member>
+<member name="T:Prajna.Tools.SystemThreadPool">
+<summary>
+ System Threadpool is use to govern the minimum thread used in the system and 
+ Control thread adjustment behavior 
+</summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolCustomized">
+ <summary>
+ Customized thread pool.  
+ </summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolTimer.Period(System.Int32)">
+ <summary>
+ get, or set firing period. Please note that setting firing period will reset the lastFired information
+ From System.Threading.Timer
+ If dueTime is zero (0), callback is invoked immediately. If dueTime is Timeout.Infinite, callback is not invoked; the timer is disabled, but can be re-enabled by calling the Change method.
+ If period is zero (0) or Timeout.Infinite, and dueTime is not Timeout.Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling Change and specifying a positive value for period.
+ </summary>                                   
+</member>
+<member name="P:Prajna.Tools.ThreadPoolTimer.DueTime(System.Int32)">
+ <summary>
+ get, or set due time. Please note that set due time will reset the lastFired information
+ From System.Threading.Timer
+ If dueTime is zero (0), callback is invoked immediately. If dueTime is Timeout.Infinite, callback is not invoked; the timer is disabled, but can be re-enabled by calling the Change method.
+ If period is zero (0) or Timeout.Infinite, and dueTime is not Timeout.Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling Change and specifying a positive value for period.
+ </summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolTimer.Period">
+ <summary>
+ get, or set firing period. Please note that setting firing period will reset the lastFired information
+ From System.Threading.Timer
+ If dueTime is zero (0), callback is invoked immediately. If dueTime is Timeout.Infinite, callback is not invoked; the timer is disabled, but can be re-enabled by calling the Change method.
+ If period is zero (0) or Timeout.Infinite, and dueTime is not Timeout.Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling Change and specifying a positive value for period.
+ </summary>                                   
+</member>
+<member name="P:Prajna.Tools.ThreadPoolTimer.DueTime">
+ <summary>
+ get, or set due time. Please note that set due time will reset the lastFired information
+ From System.Threading.Timer
+ If dueTime is zero (0), callback is invoked immediately. If dueTime is Timeout.Infinite, callback is not invoked; the timer is disabled, but can be re-enabled by calling the Change method.
+ If period is zero (0) or Timeout.Infinite, and dueTime is not Timeout.Infinite, the callback method is invoked once; the periodic behavior of the timer is disabled, but can be re-enabled by calling Change and specifying a positive value for period.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolTimer.TimerWait(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit},System.Int32,System.Int32)">
+ <summary> 
+ Initializes a new instance of the ThreadPoolTimer class.  
+ </summary> 
+ <param name="infoFunc"> A functional delegate that shows information of the timer if the timer later ill behaved (e.g., take a long time to execute in the callback function) </param>
+ <param name="callback"> A callback function to be invoked when timer fires. The callback function should not block, otherwise, it may impact other 
+ timers to fire. If the callback takes a long time to execute, warning may be issued. </param>
+ <param name="dueTime"> Next firing interval in milliseconds. If dueTime is zero (0), callback is invoked immediately. If dueTime is Timeout.Infinite, callback is not invoked; 
+ the timer is disabled, but can be re-enabled by calling the Change method. </param>
+ <param name="period"> Periodic firing interval in milliseconds. If period is zero (0) or Timeout.Infinite, and dueTime is not Timeout.Infinite, the callback method is invoked once; 
+ the periodic behavior of the timer is disabled, but can be re-enabled by calling Change and specifying a positive value for period. </param>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolTimer">
+ <summary> 
+ Thread pool timer, with capability to identify to track firing, etc.. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWait.WaitForHandleWithCancellation(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String},System.Threading.WaitHandle,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit},System.Threading.EventWaitHandle,System.Threading.CancellationToken)">
+<summary>
+ Register for a waithandle, with a cancellation token. 
+ The caller needs to check for cancellation within the continuation funcito. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWait.TryWakeup(System.Threading.WaitHandle)">
+<summary>
+ Wake up handle (if it is ManualResetEvent). The continuation function will still execute, it is the caller&apos;s responsibility 
+ to check for cancellation. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWait">
+<summary>
+ ThreadPoolWait.RegisterWaitForSingleObject, with capability:
+ 1. To remove a particular wait handle. 
+ 2. To show all wait handles queued in the system, 
+ and 3. To show long continuation (not normal). 
+</summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWaitCheck">
+ <summary>
+ UnitAction represent a set of function to be checked during the wake up of ThreadPool wait. 
+ For performance reason, it is important to only put light function in this loop. Any heavy operation should be forked to be executed on another thread. 
+ </summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWaitDeprecated.ContinueTicks@">
+<summary>
+ Information to detect deadlock in cont() 
+ i.e., a blocking operation in cont()
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWaitDeprecated.evTerminate@">
+<summary>
+ Wait for clean up to be done before exist 
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWaitDeprecated.nTerminate@">
+<summary>
+ bTerminate: stop all waiting threads. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWaitDeprecated.nTerminate(Microsoft.FSharp.Core.FSharpRef{System.Int32})">
+<summary>
+ bTerminate: stop all waiting threads. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWaitDeprecated.ContinueTicks(System.Int64)">
+<summary>
+ Information to detect deadlock in cont() 
+ i.e., a blocking operation in cont()
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWaitDeprecated.nTerminate">
+<summary>
+ bTerminate: stop all waiting threads. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWaitDeprecated.evTerminate">
+<summary>
+ Wait for clean up to be done before exist 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWaitDeprecated.ContinueTicks">
+<summary>
+ Information to detect deadlock in cont() 
+ i.e., a blocking operation in cont()
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWaitDeprecated.WaitForHandle(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String},System.Threading.WaitHandle,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit},System.Threading.ManualResetEvent)">
+ <summary>
+ ThreadPoolWaitDeprecated.WaitForHandle schedule a continuation function to be executed when handle fires. 
+ </summary>
+ <param name="infoFunc"> Information delegate of the handle/continution to be waited for, used in diagnostics </param>
+ <param name="handle"> The handle to be waited on. </param>
+ <param name="continuation"> Continuation function to be executed after handle fires. Important information: there should not be any blocking operation 
+ in the continuation function, as it will block the other handle to execute. If Prajna observes a long executing continuation function, a warning will be flagged. 
+ </param> 
+ <param name="unblockHandle"> handle to set if continuation function fired. </param>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWaitDeprecated.Wait">
+<summary>
+ Only One thread on wait
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWaitDeprecated.TryRemove(System.Threading.WaitHandle)">
+<summary>
+ Try remove an event
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWaitDeprecated.TerminateAll">
+<summary>
+ Terminate all waiting tasks . 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWaitDeprecated.MonitorAllWaitHandles">
+<summary>
+ Try to monitor all wait handles in the current ThreadPoolWaitDeprecated
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWaitDeprecated.System-IDisposable-Dispose">
+<summary>
+ Close All Active Connection, to be called when the program gets shutdown.
+ Close All Active Connection, to be called when the program gets shutdown.
+</summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWaitDeprecated">
+ <summary> 
+ Common portion of the customized threadpool, wait for handles. 
+ One wait thread will be spinned every 64 handles
+ </summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWaitHandles">
+<summary>
+ The number of blocked thread should never be smaller than 0 
+ Allow wait and control thread pool behavior 
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithAffinityMask.NumThreadsPerAffinity@">
+<summary>
+ # of thread launched per affinity
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWithAffinityMask.NumThreadsPerAffinity">
+<summary>
+ # of thread launched per affinity
+</summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWithAffinityMask">
+ <summary>
+ Customized thread pool.  
+ </summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.HandleDoneExecution@">
+<summary>
+ Whether all operation has done execution
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.TaskStatus@">
+<summary>
+ Track the execution status of the function in the operation. 
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.bSyncExecution@">
+ <summary> if bSyncExecution is true, the task will be executed on the same thread (in sync mode), 
+ A threadpool thread will be blocked in this case, which is highly not recommended.  </summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.inWait">
+<summary>
+ 0: Not in Wait All, 1: in Wait All.
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.ctsAllTasks">
+<summary>
+ this will cancel all tasks
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.numTasks">
+<summary>
+ Number of tasks pending execution 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.bSyncExecution(System.Boolean)">
+ <summary> if bSyncExecution is true, the task will be executed on the same thread (in sync mode), 
+ A threadpool thread will be blocked in this case, which is highly not recommended.  </summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.bSyncExecution">
+ <summary> if bSyncExecution is true, the task will be executed on the same thread (in sync mode), 
+ A threadpool thread will be blocked in this case, which is highly not recommended.  </summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.TaskStatus">
+<summary>
+ Track the execution status of the function in the operation. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.HandleDoneExecution">
+<summary>
+ Whether all operation has done execution
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.WaitForAllNonBlocking">
+<summary>
+ Only one clean up 
+ Execute all
+ True: done execution, False: not complete execution during timeout. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.TryExecute">
+<summary>
+ Try execute the task in the system thread pool 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.ToMonitor(System.Object)">
+<summary>
+ Monitor activity of the thread pool 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.Reset">
+<summary>
+ Reset: the interface is retained for compatibility purpose only. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.EnqueueRepeatableFunction(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Tuple{System.Threading.ManualResetEvent,System.Boolean}},System.Threading.CancellationToken,`0,Microsoft.FSharp.Core.FSharpFunc{`0,System.String})">
+ <summary>
+ Enqueue an action for repeated execution, until the action returns (*, true). 
+ The first of tuple is a ManualResetEvent that signals whether the repeatable action needs to wait, 
+ The second of tuple is a boolean, when true, signals that the action terminates, and when false, signals that the action still executes. 
+ The action is uniqueuely identified by a key, which can be used to get information
+ of the action. 
+ </summary>
+ <param name="affinityMask"> Reserved for thread affinity mask (currently not supported by .Net). </param>
+ <param name="action"> The function to be enqueued.  </param>
+ <param name="key"> The key that uniquely identified the action.  </param>
+ <param name="info"> a function that returns information of the action. </param>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.CloseAllThreadPool">
+<summary>
+ Timeout 
+ Only Wait when we have some operation in execution and the task is not cancelled
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.CheckForAll">
+<summary>
+ Check if all tasks have been executed. 
+ Print a message if there is still task left. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1.Cancel">
+<summary>
+ Cancel all jobs in the threadpool 
+ Note that since we use system threadpool, we can&apos;t actually cancel a queued work item, but can only wait for that 
+ job to be scheduled and cancel it 
+</summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWithWaitHandlesSystem`1">
+ <summary> 
+ Managed a customzied thread pool of N Threads that executes a set of (key, func() -> handle, bTerminated ).
+ The threads are uniquenly allocated to execute the set of jobs enqueued to the thread pool. 
+ Key is used to identified the action, so that if the user desired, he/she can print some information of on the action. 
+ If the action is to block, it will return handle, false, so that the thread will wait on the handles. 
+ If the action can be executed again, it will return null, false, so that it will be queued for execution in the next cycle. 
+ If the action is terminated, it will return *, true, and it will be dequeued. </summary>
+</member>
+<member name="T:Prajna.Tools.ThreadPoolWithWaitHandles`1">
+<summary>
+ Currently, the system threadpool finished the unittest in 4:16
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadTracking.ThreadLifeMonitorTraceLevel@">
+<summary>
+ TraceLevel to Monitor the life of threads. If you would like to monitor thread life cycle in Prajna, please set the Property to a lower trace level, e.g., LogLevel.Info. 
+</summary>
+</member>
+<member name="F:Prajna.Tools.ThreadTracking.ThreadJoinTimeOut@">
+<summary>
+ Timer to Wait for all threads to termiante
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.ThreadLifeMonitorTraceLevel(Prajna.Tools.LogLevel)">
+<summary>
+ TraceLevel to Monitor the life of threads. If you would like to monitor thread life cycle in Prajna, please set the Property to a lower trace level, e.g., LogLevel.Info. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.ThreadJoinTimeOut(System.Int32)">
+<summary>
+ Timer to Wait for all threads to termiante
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.ThreadLifeMonitorTraceLevel">
+<summary>
+ TraceLevel to Monitor the life of threads. If you would like to monitor thread life cycle in Prajna, please set the Property to a lower trace level, e.g., LogLevel.Info. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.ThreadJoinTimeOut">
+<summary>
+ Timer to Wait for all threads to termiante
+</summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.StartThreadForFunction">
+ <summary> 
+ This is the preferred way to start a thread. 
+ nameFunc: unit-> string, give information on what thread is running
+ func: unit->unit the main body of the thread. 
+ </summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.StartThreadForActionWithCancelation">
+ <summary> 
+ This is the preferred way to start a thread. 
+ threadAffinity: IntPtr(-1) if on any processor, otherwise, assigned to a particular thread
+ cancelFunc: unit-> unit, this callback func is called if external process request the thread to terminate
+ nameFunc: unit-> string, give information on what thread is running
+ action: the main body of the thread. 
+ </summary>
+</member>
+<member name="P:Prajna.Tools.ThreadTracking.StartThreadForAction">
+ <summary> 
+ nameFunc: unit-> string, give information on what thread is running
+ action: the main body of the thread. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ThreadTracking.StartThreadForFunctionWithCancelation(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+ <summary> 
+ This is the preferred way to start a thread. 
+ cancelFunc: unit-> unit, this callback func is called if external process request the thread to terminate
+ nameFunc: unit-> string, give information on what thread is running
+ func: unit->unit the main body of the thread. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ThreadTracking.StartThreadForFunctionSTA(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+ <summary> 
+ This is the preferred way to start a STA thread (usually for Windows UI)
+ nameFunc: unit-> string, give information on what thread is running
+ func: unit->unit the main body of the thread. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ThreadTracking.StartThreadForActionWithCancelationAndApartment(System.Threading.ApartmentState,System.IntPtr,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String},System.Action{Microsoft.FSharp.Core.Unit})">
+ <summary> 
+ This is the preferred way to start a thread. 
+ apartmentState: ApartmentState
+ threadAffinity: IntPtr(-1) if on any processor, otherwise, assigned to a particular thread
+ cancelFunc: unit-> unit, this callback func is called if external process request the thread to terminate
+ nameFunc: unit-> string, give information on what thread is running
+ action: the main body of the thread. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.ThreadTracking.Finalize">
+<summary>
+ Standard form for all class that use CleanUp service
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadTracking.System-IDisposable-Dispose">
+<summary>
+ Close All Active Connection, to be called when the program gets shutdown.
+ Standard form for all class that use CleanUp service
+ Close All Active Connection, to be called when the program gets shutdown.
+</summary>
+</member>
+<member name="M:Prajna.Tools.ThreadTracking.CloseAllActiveThreads">
+ <summary>
+ Shutdown all active threads tracked by ThreadTracking by calling their cancellation functions. 
+ </summary>
+ <param name="millisecondTimeout"> Timeout value (in milliseconds) for the cancelled thread to join. </param>
+</member>
+<member name="T:Prajna.Tools.ThreadTracking">
+ <summary> 
+ Tracking Execution Threads, this is the preferred way to start thread, as it will make sure that threads get terminated when 
+ unexpected things happen (e.g., Daemon dies)
+ </summary>
+</member>
+<member name="T:Prajna.Tools.UnitAction">
+ <summary>
+ UnitAction represent one function to be checked during the wake up of ThreadPool wait. 
+ For performance reason, it is important to only put light function in this loop. Any heavy operation should be forked to be executed on another thread/task. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.WaitHandleCollection.WaitAll(System.Int32,System.Int32,System.Int32,Prajna.Tools.LogLevel)">
+<summary>
+ Return: true, all waithandles have fired.
+         false, some waithandles have not fired. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.WaitHandleCollection.CloseAll">
+<summary>
+ Forced to close all 
+</summary>
+</member>
+<member name="T:Prajna.Tools.WaitHandleCollection">
+<summary>
+ A collection of WaitHandles, each of which holds a continuation function to be executed if the handle fires. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.BytesTools.BytesToHex(System.Byte[])">
+ <summary>
+ Show byte[] in hexidecimal format. 
+ </summary>  
+</member>
+<member name="M:Prajna.Tools.BytesTools.HashByteArraySha512(System.Byte[],System.Int32,System.Int32)">
+ <summary>
+ Hash input data via Sha512, truncate first 32B as the hash signature. 
+ This is the algorithm used in Primary Data deduplication in Windows Server 2012 R2. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.BytesTools.HashByteArrayToGuid(System.Byte[])">
+<summary>
+ Compute Hash of the bytearray, and use first 16B of hash to form a GUID
+</summary>
+</member>
+<member name="M:Prajna.Tools.BytesTools.HashLengthPlusByteArray(System.Security.Cryptography.HashAlgorithm,System.Byte[])">
+ <summary>
+ Calculate a hash that matches the file hash in PrajnaRemote execution roster. The calculdated hash include 
+ length of byte[] plus the content of the byte[].
+ </summary>
+</member>
+<member name="M:Prajna.Tools.BytesTools.HashByteArray(System.Byte[])">
+<summary>
+ Compute Hash of the bytearray
+</summary>
+</member>
+<member name="M:Prajna.Tools.BytesTools.ReadToEnd(System.IO.Stream)">
+<summary>
+ Read an entire stream to byte[]
+</summary>
+</member>
+<member name="T:Prajna.Tools.BytesTools">
+ <summary>
+ A set of helper routine for byte[] operations
+ </summary>
+</member>
+<member name="M:Prajna.Tools.CSharp.Logger.LogF(System.String,System.Guid,Prajna.Tools.LogLevel,System.Func{System.String})">
+<summary>
+ Log message generated by &quot;messageFunc&quot; using &quot;JobId&quot;, 
+ &quot;messageFunc&quot; is evaluated only if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.CSharp.Logger.LogF(System.Guid,Prajna.Tools.LogLevel,System.Func{System.String})">
+<summary>
+ Log message generated by &quot;messageFunc&quot; using &quot;JobId&quot;, 
+ &quot;messageFunc&quot; is evaluated only if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.CSharp.Logger.LogF(System.String,Prajna.Tools.LogLevel,System.Func{System.String})">
+<summary>
+ Log message generated by &quot;messageFunc&quot; using &quot;logId&quot;, 
+ &quot;messageFunc&quot; is evaluated only if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.CSharp.Logger.LogF(Prajna.Tools.LogLevel,System.Func{System.String})">
+<summary>
+ Log the message generated by &quot;messageFunc&quot;, &quot;messageFunc&quot; is evaluated only if logLevel &lt;= Logger.DefaultLogLevel
+</summary>
+</member>
+<member name="M:Prajna.Tools.CSharp.Logger.Do(System.String,Prajna.Tools.LogLevel,System.Action{Microsoft.FSharp.Core.Unit})">
+<summary>
+ Execute &apos;action&apos; if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.CSharp.Logger.Do(Prajna.Tools.LogLevel,System.Action{Microsoft.FSharp.Core.Unit})">
+<summary>
+ Execute &apos;action&apos; if logLevel &lt;= Logger.DefaultLogLevel 
+</summary>
+</member>
+<member name="T:Prajna.Tools.CSharp.Logger">
+<summary>
+ Provides logging interface and utility functions. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.GetAssemblyBindingsForCurrentExe">
+<summary>
+ Get the content of assemblyBinding (if any) from the current app&apos;s configuration
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.GetConfigurationForCurrentExe">
+<summary>
+ Get the content of the current configuration file 
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.CombineConfigurationFile(System.String,System.String)">
+<summary>
+ Merge configuration files
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.OpenConfigurationFileAsXML(System.String)">
+<summary>
+ OpenConfigurationFileAsXML
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.CombineConfiguration(System.Configuration.Configuration,System.Configuration.Configuration)">
+<summary>
+ Merge configuration
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.CombineConfigurationGroup(System.Configuration.ConfigurationSectionGroup,System.Configuration.ConfigurationSectionGroup)">
+<summary>
+ Merge configuration of group
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.replaceAssemblyBindingsForExe(System.Configuration.Configuration,Prajna.Tools.AssemblyBinding)">
+<summary>
+ Replace &quot;assemblyBinding for an exe&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.ConfigurationUtils.getAssemblyBindingsForExe(System.String)">
+<summary>
+ Get the content of assemblyBinding (if any) from an executable&apos;s configuration
+</summary>
+</member>
+<member name="M:Prajna.Tools.DirUtils.DirectoryInfoCreateIfNotExists(System.String)">
+<summary>
+ Return DirectoryInfo, create the directory if it doesn&apos;t exist. 
+ The directory created this way will allow access control by everyone to ease use in cluster scenario. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FSharp.Logger.LogF(System.String,System.Guid,Prajna.Tools.LogLevel,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+<summary>
+ Log message generated by &quot;messageFunc&quot; using &quot;JobId&quot;, 
+ &quot;messageFunc&quot; is evaluated only if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.FSharp.Logger.LogF(System.Guid,Prajna.Tools.LogLevel,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+<summary>
+ Log message generated by &quot;messageFunc&quot; using &quot;JobId&quot;, 
+ &quot;messageFunc&quot; is evaluated only if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.FSharp.Logger.LogF(System.String,Prajna.Tools.LogLevel,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+<summary>
+ Log message generated by &quot;messageFunc&quot; using &quot;logId&quot;, 
+ &quot;messageFunc&quot; is evaluated only if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.FSharp.Logger.LogF(Prajna.Tools.LogLevel,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.String})">
+<summary>
+ Log the message generated by &quot;messageFunc&quot;, &quot;messageFunc&quot; is evaluated only if logLevel &lt;= Logger.DefaultLogLevel
+</summary>
+</member>
+<member name="M:Prajna.Tools.FSharp.Logger.Do(System.String,Prajna.Tools.LogLevel,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Execute &apos;action&apos; if &quot;logLevel&quot; is less than or equal to the log level for &quot;logId&quot;
+</summary>
+</member>
+<member name="M:Prajna.Tools.FSharp.Logger.Do(Prajna.Tools.LogLevel,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Execute &apos;action&apos; if logLevel &lt;= Logger.DefaultLogLevel 
+</summary>
+</member>
+<member name="T:Prajna.Tools.FSharp.Logger">
+<summary>
+ Provides logging interface and utility functions. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.FSharp.LogLevel">
+<summary>
+ LogLevel 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.SaveToFile(System.String,System.String)">
+<summary>
+ save a string to file, do not write if we find that the file is not writable.
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.ReadFromFile(System.String)">
+<summary>
+ read a string from file
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.WriteBytesToFileConcurrentCreate(System.String,System.Byte[])">
+<summary>
+ Write a byte[] to file, create the directory of the file if it doesn&apos;t exist. The call deal with possibility of multiple processes are writing to the exact same file at the same 
+ time. Such situation occurs for the Prajna daemon to write cluster metadata, DKV metadata, 
+ Assembly, dependencies file, etc.. WriteBytesToFileConcurrent checks if the file has been written concurrently, 
+ if that is the case, one of the process will verify (read) the file and make sure that is the same content 
+ that is to be written. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.WriteBytesToFileConcurrent(System.String,System.Byte[])">
+<summary>
+ Write a byte[] to file, with possibility of multiple processes are writing to the exact same file at the same 
+ time. Such situation occurs for the Prajna daemon to write cluster metadata, DKV metadata, 
+ Assembly, dependencies file, etc.. WriteBytesToFileConcurrent checks if the file has been written concurrently, 
+ if that is the case, one of the process will verify (read) the file and make sure that is the same content 
+ that is to be written. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.WriteBytesToFileConcurrentP(System.String,System.Byte[],System.Int32,System.Int32)">
+<summary>
+ Write a byte[] to file, with possibility of multiple processes are writing the exact same file at the same 
+ time. Such situation occurs for the Prajna daemon to write cluster metadata, DKV metadata, 
+ Assembly, dependencies file, etc.. WriteBytesToFileConcurrent checks if the file has been written concurrently, 
+ if that is the case, one of the process will verify (read) the file and make sure that is the same content 
+ that is to be written. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.WriteBytesToFileConcurrentPCompare(System.String,System.Byte[],System.Int32,System.Int32,System.Boolean)">
+<summary>
+ Write a byte[] to file, with possibility of multiple processes are writing the exact same file at the same 
+ time. Such situation occurs for the Prajna daemon to write cluster metadata, DKV metadata, 
+ Assembly, dependencies file, etc.. WriteBytesToFileConcurrentPCompare may check (if bComp=true) if the file has been written concurrently, 
+ if that is the case, one of the process will verify (read) the file and make sure that is the same content 
+ that is to be written. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.WriteBytesToFileCreate(System.String,System.Byte[])">
+<summary>
+ Write a byte[] to file, create the directory of the file if it doesn&apos;t exist
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.RecursiveGetFiles(System.String,System.String[])">
+<summary>
+ Recurisive traverse directories with filter
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.FilterExts(System.String[],System.Collections.Generic.IEnumerable{System.String})">
+<summary>
+ Filter extensions. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.IsRelativePath(System.String)">
+<summary>
+ Is file of a relative path
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.IsExts(System.String[],System.String)">
+<summary>
+ Is file of a certain extension
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.RecurGetFiles(System.String)">
+<summary>
+ Recursively traverse directories
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.LinkFile(System.String,System.String)">
+<summary>
+ Create a link of an existing file
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.CopyFile(System.String,System.String)">
+<summary>
+ Copy file to a destination 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.LinkFileWindows(System.String,System.String)">
+<summary>
+ Create a link of a file on Windows using Interop
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.TouchFile(System.String)">
+<summary>
+ Touch a file, change its last write time to now. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.AppendToFile(System.String,System.String)">
+<summary>
+ Append a string to file
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.WriteBytesToFile(System.String,System.Byte[])">
+<summary>
+ Write a byte[] to file 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.CreateFileStreamForRead(System.String)">
+ <summary>
+ Create a file stream to read
+ Only when the file is still hold by another process, wait for a small file to try to read. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.CreateFileStreamForWrite(System.String)">
+ <summary>
+ Create a file stream to write, and make the file accessible to everyone (for shared use in a cluster)
+ Caller should be responsible for dispose the returned stream.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.MakeFileAccessible(System.String)">
+ <summary>
+ Make the file accessible to everyone, so that other process can manage the file. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.ReadBytesFromFile(System.String)">
+<summary>
+ Read a byte[] from files
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.GetDrive(System.String)">
+<summary>
+ Get drive letter 
+</summary>
+</member>
+<member name="M:Prajna.Tools.FileTools.DirectoryInfoCreateIfNotExists(System.String)">
+<summary>
+ Return DirectoryInfo, create the directory if it doesn&apos;t exist. 
+ The directory created this way will allow access control by everyone to ease use in cluster scenario. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.FileTools">
+ <summary>
+ A set of helper routine for file operations
+ </summary>
+</member>
+<member name="P:Prajna.Tools.GenericSerialization.PrajnaFormatterGuid">
+<summary>
+ New generic serializer (our BinarySerializer)
+</summary>
+</member>
+<member name="P:Prajna.Tools.GenericSerialization.BinaryFormatterGuid">
+<summary>
+ Default generic serializer (standard .Net BinaryFormatter)
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.WrapImageURI(System.Int32,System.Int32,System.String,System.String,System.Text.StringBuilder)">
+<summary>
+ Append an image with URL to HTML paragraph, with width and height defined the size of included image, uri locates the image link, and al_text is the alternative text of the image. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.WrapParagraph(Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},System.Text.StringBuilder)">
+<summary>
+ Append a properly formatted HTML paragraph, with function info(sb) appends paragraph text. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.WrapParagraphWithID(Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},System.Text.StringBuilder)">
+<summary>
+ Append a properly formatted HTML paragraph with ID, function id(sb) appends ID string, and function info(sb) appends paragraph text. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.FormLink(Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},System.Text.StringBuilder)">
+<summary>
+ Append a properly formatted HTML link to a HTML page. Function link(sb) appends href link, and function s(sb) appends link text. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.WrapTableItem(Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},System.Text.StringBuilder)">
+<summary>
+ Append a table column to Http page, where function s(sb) generates a HTML table column
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.WrapTableRow(Microsoft.FSharp.Core.FSharpFunc{System.Text.StringBuilder,System.Text.StringBuilder},System.Text.StringBuilder)">
+<summary>
+ Append a table row to Http page, where function s(sb) generates a HTML table row
+</summary>
+</member>
+<member name="M:Prajna.Tools.HttpBuilderHelper.WrapRaw(System.String,System.Text.StringBuilder)">
+<summary>
+ Append a properly formatted HTML string to a HTML page
+</summary>
+</member>
+<member name="T:Prajna.Tools.HttpBuilderHelper">
+<summary>
+ Helper function to form a properly formatted HTTP page 
+</summary>
+</member>
+<member name="T:Prajna.Tools.InteropWithJobObject">
+<summary>
+ Hold Interop Win32 system call related to JobObject
+</summary>
+</member>
+<member name="M:Prajna.Tools.InteropWithKernel32.CreateHardLink(System.String,System.String,System.IntPtr)">
+<summary>
+ Establishes a hard link between an existing file and a new file. This function is only supported on the NTFS file system, and only for files, not directories.
+ The two files will be considered the same once linked. 
+ see https://msdn.microsoft.com/en-us/library/windows/desktop/aa363860(v=vs.85).aspx
+</summary>
+</member>
+<member name="M:Prajna.Tools.InteropWithKernel32.CreateSymbolicLink(System.String,System.String,System.UInt32)">
+<summary>
+ Creates a symbolic link.
+ see https://msdn.microsoft.com/en-us/library/windows/desktop/aa363866(v=vs.85).aspx
+</summary>
+</member>
+<member name="T:Prajna.Tools.InteropWithKernel32">
+<summary>
+ Hold Interop Win32 system call 
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.ProcWaitHandle@">
+<summary>
+ the event being waited upon for processing to resume
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.ReleaseItem@">
+<summary>
+ A function which gets executed once an item is finished processing
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.Terminate@">
+<summary>
+ A function to execute for non-graceful termination, i.e. without waiting for queue to empty
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.Close@">
+<summary>
+ A function to execute when no more items are in queue and IsClosed returns true
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.Proc@">
+<summary>
+ A function which processes each item, if multiple processing needs to take place, use
+ AddProc or RegisterItem to add processing and UnregisterItem to remove processing
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.Dequeue@">
+<summary>
+ A function which dequeues data from the internal BaseQ
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.Component`1.IsClosed@">
+<summary>
+ A (unit-&gt;bool) function which returns true/false to tell if any more data needs to be processed
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Terminate(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ A function to execute for non-graceful termination, i.e. without waiting for queue to empty
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.ReleaseItem(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.FSharpRef{`0},Microsoft.FSharp.Core.Unit})">
+<summary>
+ A function which gets executed once an item is finished processing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Q(Prajna.Tools.Queue.BaseQ{`0})">
+<summary>
+ The internal component Q into which elements are queued for processing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.ProcWaitHandle(System.Threading.ManualResetEvent)">
+<summary>
+ the event being waited upon for processing to resume
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Proc(Microsoft.FSharp.Core.FSharpFunc{`0,System.Tuple{System.Boolean,System.Threading.ManualResetEvent}})">
+<summary>
+ A function which processes each item, if multiple processing needs to take place, use
+ AddProc or RegisterItem to add processing and UnregisterItem to remove processing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.IsClosed(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Boolean})">
+<summary>
+ A (unit-&gt;bool) function which returns true/false to tell if any more data needs to be processed
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Dequeue(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.FSharpRef{`0},System.Tuple{System.Boolean,System.Threading.ManualResetEvent}})">
+<summary>
+ A function which dequeues data from the internal BaseQ
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Close(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ A function to execute when no more items are in queue and IsClosed returns true
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Terminate">
+<summary>
+ A function to execute for non-graceful termination, i.e. without waiting for queue to empty
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.ReleaseItem">
+<summary>
+ A function which gets executed once an item is finished processing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Q">
+<summary>
+ The internal component Q into which elements are queued for processing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.ProcWaitHandle">
+<summary>
+ the event being waited upon for processing to resume
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Proc">
+<summary>
+ A function which processes each item, if multiple processing needs to take place, use
+ AddProc or RegisterItem to add processing and UnregisterItem to remove processing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.IsClosed">
+<summary>
+ A (unit-&gt;bool) function which returns true/false to tell if any more data needs to be processed
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Dequeue">
+<summary>
+ A function which dequeues data from the internal BaseQ
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.Component`1.Close">
+<summary>
+ A function to execute when no more items are in queue and IsClosed returns true
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.UnregisterProc(System.String)">
+<summary>
+ Unregister a processor for the component
+ &lt;param name=&quot;name&quot;&gt;The name of the processing to be removed&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.StartWorkItem``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Tuple{System.Threading.ManualResetEvent,System.Boolean}},Prajna.Tools.ThreadPoolWithWaitHandlesSystem{``0},System.Threading.CancellationToken,``0,Microsoft.FSharp.Core.FSharpFunc{``0,System.String})">
+<summary>
+ Start work item on pool
+ &lt;param name=&quot;threadPool&quot;&gt;The thread pool to execute upon&lt;/param&gt;
+ &lt;param name=&quot;tpKey&quot;&gt;A key to identify the processing component&lt;/param&gt;
+ &lt;param name=&quot;infoFunc&quot;&gt;A function which returns information about the processing component&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.StartProcessOnOwnThread``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Tuple{System.Threading.ManualResetEvent,System.Boolean}},``0,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit}},Microsoft.FSharp.Core.FSharpFunc{``0,System.String})">
+<summary>
+ Start component processing on own thread
+ &lt;param name=&quot;tpKey&quot;&gt;A key to identify the thread&lt;/param&gt;
+ &lt;param name=&quot;infoFunc&quot;&gt;A function which returns information about the thread&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.StartProcess``1(Prajna.Tools.ThreadPoolWithWaitHandlesSystem{``0},System.Threading.CancellationToken,``0,Microsoft.FSharp.Core.FSharpFunc{``0,System.String})">
+<summary>
+ Start component processing on threadpool - internal as ThreadPoolWithWaitHandles is not internal
+ &lt;param name=&quot;threadPool&gt;The thread pool to execute upon&lt;/param&gt;
+ &lt;param name=&quot;cts&quot;&gt;A cancellation token to cancel the processing&lt;/param&gt;
+ &lt;param name=&quot;tpKey&quot;&gt;A key to identify the processing component&lt;/param&gt;
+ &lt;param name=&quot;infoFunc&quot;&gt;A function which returns information about the processing component&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.SelfTerminate">
+<summary>
+ Self terminate the component and start terminating the pipeline
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.SelfClose">
+<summary>
+ Self close the component and start closing the pipeline
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.RegisterProc(System.String,Microsoft.FSharp.Core.FSharpFunc{`0,System.Threading.ManualResetEvent})">
+<summary>
+ Register a processor for the component with name
+ If this is used, the Proc property does not need to be set
+ &lt;param name=&quot;name&quot;&gt;The name of the processing component - used for unregistering&lt;/param&gt;
+ &lt;param name=&quot;processItem&quot;&gt;A function which does processing, returns event if cannot complete&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.InitMultipleProcess">
+<summary>
+ Initialize the use of multiple processors - this is useful if multiple actions need to be performed
+ on each item in the queue - use AddProc/RegisterProc to add processing, UnregisterProc to remove processing
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.GetOrAddProc(System.String,Microsoft.FSharp.Core.FSharpFunc{`0,System.Threading.ManualResetEvent})">
+<summary>
+ Get or add a new processor for the component with name
+ If this is used, the Proc property does not need to be set
+ &lt;param name=&quot;name&quot;&gt;The name of the processing component - used for unregistering&lt;/param&gt;
+ &lt;param name=&quot;processItem&quot;&gt;A function which does processing, returns event if cannot complete&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.System-IDisposable-Dispose">
+<summary>
+ Close All Active Connection, to be called when the program gets shutdown.
+ Standard form for all class that use CleanUp service
+ Close All Active Connection, to be called when the program gets shutdown.
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.DefaultTerminate``1(Prajna.Tools.Network.Component{`0},Prajna.Tools.Network.Component{``0},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit}},Microsoft.FSharp.Core.Unit)">
+<summary>
+ A default &quot;Terminate&quot; function which can be used
+ &lt;param name=&quot;self&quot;&gt;A reference to the component&lt;/param&gt;
+ &lt;param name=&quot;nextComponent&quot;&gt;A reference to next component in pipeline - can be set to null&lt;/param&gt;
+ &lt;param name=&quot;triggerNext&quot;&gt;An option for code to execute after terminate done&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.DefaultClose``1(Prajna.Tools.Network.Component{`0},Prajna.Tools.Network.Component{``0},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit}},Microsoft.FSharp.Core.Unit)">
+<summary>
+ A default &quot;Close&quot; function which can be used
+ &lt;param name=&quot;self&quot;&gt;A reference to the component&lt;/param&gt;
+ &lt;param name=&quot;nextComponent&gt;A reference to next component in pipeline - can be set to null&lt;/param&gt;
+ &lt;param name=&quot;triggerNext&gt;An option for code to execute after close done&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.ConnectTo``2(Prajna.Tools.ThreadPoolWithWaitHandlesSystem{``0},System.Boolean,Prajna.Tools.Network.Component{``1},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit}})">
+<summary>
+ Connect current component to next component using:
+ - &quot;DequeueWait&quot; for dequeue action
+ - &quot;DefaultClose&quot; for close action
+ - &quot;DefaultTerminate&quot; for terminate action
+ &lt;param name=&quot;threadPool&quot;&gt;The threadpool being used for processing&lt;/param&gt;
+ &lt;param name=&quot;adjustOwnEnqueue&quot;&gt;True for first component in pipeline&lt;/param&gt;
+ &lt;param name=&quot;nextComponent&quot;&gt;The next component in pipeline - can be null&lt;/param&gt;
+ &lt;param name=&quot;nextClose&quot;&gt;An option for code to execute after close done&lt;/param&gt;
+ &lt;param name=&quot;nextTerminate&quot;&gt;An option for code to execute after terminate done&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.AddWorkItem``1(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Tuple{System.Threading.ManualResetEvent,System.Boolean}},Prajna.Tools.ThreadPoolWithWaitHandlesSystem{``0},System.Threading.CancellationToken,``0,Microsoft.FSharp.Core.FSharpFunc{``0,System.String})">
+<summary>
+ Add work item on pool, but don&apos;t necessarily start it until ExecTP is called
+ &lt;param name=&quot;threadPool&quot;&gt;The thread pool to execute upon&lt;/param&gt;
+ &lt;param name=&quot;tpKey&quot;&gt;A key to identify the processing component&lt;/param&gt;
+ &lt;param name=&quot;infoFunc&quot;&gt;A function which returns information about the processing component&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Component`1.AddProc(Microsoft.FSharp.Core.FSharpFunc{`0,System.Threading.ManualResetEvent})">
+<summary>
+ Register a processor for the component - same as RegisterProc, but default name is created and returned
+ &lt;param name=&quot;processItem&quot;&gt;A function which does processing, returns event if cannot complete&lt;/param&gt;
+ &lt;returns&gt;The internal name of the processor - can use for unregistering&lt;/returns&gt;
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.Component`1">
+<summary>
+ A component class provides a generic tool to build a processing pipeline using a threadpool
+ It provides the following functionality:
+ 1. An arbitrary object (an item of type &apos;T) is dequeue from a queue - a queue must have a BaseQ as a base class
+ 2. The object is repeatedly &quot;processed&quot; until the processing says it is finished by arbirary piece of processing code
+    The processing code returns a tuple of (bool, ManualResetEvent): (complete, event)
+    When complete == true, then item has completed and new item is to be dequeued
+    When event &lt;&gt; null, then processing cannot continue and must wait for event to fire before trying again
+    There may be cases when complete is true, but event is not null, in these cases, processing waits for event to fire
+    However, if complete is false, event must be non-null
+ The processing may occur on its own thread or on a threadpool
+ If  event &lt;&gt; null,
+ - If threadpool is being used, the component processing is removed from the threadpool work item queue
+   and gets requeued once event fires
+ - If processing is occuring on own thread, then that thread blocks for event to fire
+ There is also support for multiple processing steps to take place in a single item
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.System-IDisposable-Dispose">
+<summary>
+ Releases all resources used by the current instance.
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncSendBufWithSize(System.Byte[],System.Int32,System.Int32)">
+<summary>
+ The same as AsyncSendBufWithSize, but no callback
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncSendBufWithSize(Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Object,Microsoft.FSharp.Core.Unit}},System.Object,System.Byte[],System.Int32,System.Int32)">
+<summary>
+ Asynchronously send buffer along with size of buffer and execute callback upon completion
+ The buffer size is sent first, followed by the buffer (so receiver does not need to know size a priori)
+ &lt;param name=&quot;callbackO&quot;&gt;
+ Optional parameter to specify callback to execute
+ If specified callback takes in state, i.e. callback(state)
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;The state to pass into the callback&lt;/param&gt;
+ &lt;param name=&quot;buf&quot;&gt;The buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferOffset&quot;&gt;The buffer offset in the buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferSize&quot;&gt;The amount of data to send starting at bufferOffset&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncSendBuf(System.Byte[],System.Int32,System.Int32)">
+<summary>
+ The same as AsyncSendBuf, except no callback
+ &lt;param name=&quot;state&quot;&gt;The state to pass into the callback&lt;/param&gt;
+ &lt;param name=&quot;buf&quot;&gt;The buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferOffset&quot;&gt;The buffer offset in the buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferSize&quot;&gt;The amount of data to send starting at bufferOffset&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncSendBuf(Microsoft.FSharp.Core.FSharpFunc{System.Object,Microsoft.FSharp.Core.Unit},System.Object,System.Byte[],System.Int32,System.Int32)">
+<summary>
+ The same as AsyncSendBuf, except callback is mandatory
+ &lt;param name=&quot;callback&quot;&gt;
+ Callback takes in state, i.e. callback(state)
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;The state to pass into the callback&lt;/param&gt;
+ &lt;param name=&quot;buf&quot;&gt;The buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferOffset&quot;&gt;The buffer offset in the buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferSize&quot;&gt;The amount of data to send starting at bufferOffset&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncSendBuf(Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Object,Microsoft.FSharp.Core.Unit}},System.Object,System.Byte[],System.Int32,System.Int32)">
+<summary>
+ Asynchronously send buffer and execute callback upon completion
+ &lt;param name=&quot;callbackO&quot;&gt;
+ Optional parameter to specify callback to execute
+ If specified callback takes in state, i.e. callback(state)
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;The state to pass into the callback&lt;/param&gt;
+ &lt;param name=&quot;buf&quot;&gt;The buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferOffset&quot;&gt;The buffer offset in the buffer to send&lt;/param&gt;
+ &lt;param name=&quot;bufferSize&quot;&gt;The amount of data to send starting at bufferOffset&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncRecvBufWithSize(Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Object,System.Byte[],System.Int32,System.Int32},Microsoft.FSharp.Core.Unit},System.Object,System.Int32)">
+<summary>
+ Asynchronously receive a buffer along with its size and execute callback when receive finishes
+ The length of the buffer is first read, then the buffer is read.
+ Receive fails and underlying connection is closed if buffer size is larger than maximum allowed.
+ &lt;param name=&quot;callback&quot;&gt;
+ A callback which executes once receive completes
+ Callback takes in (state, buffer, offset size)=(obj, byte[], int, int) tuple
+   state - arbitrary state specified by &quot;state&quot; parameter
+   buffer - the buffer which contains the data retrieved
+            the callback must copy the data or appropriately control bufferOffset 
+            before starting another AsyncRecvBuf if needed as buffer is reused
+   offset - the offfset in buffer where data has been written
+   size - the amount of data which has been written to buffer
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;
+ The state to pass to the callback
+ &lt;/param&gt;
+ &lt;param name=&quot;bufferOffset&quot;&gt;
+ The bufferOffset where data is to be written within internal buffer
+ &lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericBuf.AsyncRecvBuf(Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Object,System.Byte[],System.Int32,System.Int32},Microsoft.FSharp.Core.Unit},System.Object,System.Int32,System.Int32)">
+<summary>
+ Asynchronously receive a buffer and execute a callback when receive finishes
+ &lt;param name=&quot;callback&quot;&gt;
+ A callback which executes once receive completes
+ Callback takes in (state, buffer, offset size)=(obj, byte[], int, int) tuple
+   state - arbitrary state specified by &quot;state&quot; parameter
+   buffer - the buffer which contains the data retrieved
+            the callback must copy the data or appropriately control bufferOffset 
+            before starting another AsyncRecvBuf if needed as buffer is reused
+   offset - the offfset in buffer where data has been written
+   size - the amount of data which has been written to buffer
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;
+ The state to pass to the callback
+ &lt;/param&gt;
+ &lt;param name=&quot;bufferOffset&quot;&gt;
+ The bufferOffset where data is to be written within internal buffer
+ &lt;/param&gt;
+ &lt;param name=&quot;bufferSize&quot;&gt;
+ The length of data to be read
+ &lt;/param&gt;
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.GenericBuf">
+<summary>
+ A class capable of reading/writing a buffer asynchronously using an underlying connection
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.GenericConn.RecvQEnqueue@">
+<summary>
+ The function to call to enqueue received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.GenericConn.AfterSendCallback@">
+<summary>
+ Function to call when Send finishes
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.GenericConn.OnSocketCloseState@">
+<summary>
+ State to be passed in when OnSocketClose is called
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.GenericConn.OnSocketClose@">
+<summary>
+ Optional argument - function to call upon socket closing
+</summary>
+</member>
+<member name="F:Prajna.Tools.Network.GenericConn.bUseSendTokens">
+<summary>
+ TokenBucket size for sending rate control, tokens in units of bits
+ see: http://fixunix.com/routers/78968-importance-gigabit-switch-port-buffer-size-question.html
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.SendSpeed(System.Int64)">
+<summary>
+ Set maximum sending speed for connection in bits per second
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.RecvQEnqueue(Microsoft.FSharp.Core.FSharpFunc{Prajna.Tools.RBufPart{System.Byte},System.Tuple{System.Boolean,System.Threading.ManualResetEvent}})">
+<summary>
+ The function to call to enqueue received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.OnSocketCloseState(System.Object)">
+<summary>
+ State to be passed in when OnSocketClose is called
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.OnSocketClose(Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{Prajna.Tools.Network.IConn,Microsoft.FSharp.Core.FSharpFunc{System.Object,Microsoft.FSharp.Core.Unit}}})">
+<summary>
+ Optional argument - function to call upon socket closing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.MaxTokenSize(System.Int64)">
+<summary>
+ Set maximum number of tokens for connection 
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufSendRem(System.Int32)">
+<summary>
+ If ProcessSendGenericConn is being used used for sender component processing
+ this specifies the remainder of the current buffer being processed and copied to a SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufSendOffset(System.Int32)">
+<summary>
+ If ProcessSendGenericConn is being used used for sender component processing
+ this specifies the offset in the current buffer being processed and copied to a SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufSend(System.Byte[])">
+<summary>
+ If ProcessSendGenericConn is being used used for sender component processing
+ this specifies the current buffer being processed and copied to a SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecvRem(System.Int32)">
+<summary>
+ If RecvDequeueGenericConn/x.ProcessRecvGenericConn are being used for component processing
+ this specifies the remaining size of the buffer being used to process and copy data from a received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecvOffset(System.Int32)">
+<summary>
+ If RecvDequeueGenericConn/x.ProcessRecvGenericConn are being used for component processing
+ this specifies the offset within the buffer being to process and copy data from a received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecvMs(Prajna.Tools.StreamBase{System.Byte})">
+<summary>
+ If RecvDequeueGenericConn/x.ProcessRecvGenericConn are being used for component processing
+ this specifies the memorystream
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecv(System.Byte[])">
+<summary>
+ this specifies the current buffer being used to process and copy data from a received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.AfterSendCallback(Microsoft.FSharp.Core.FSharpFunc{System.Net.Sockets.SocketAsyncEventArgs,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Function to call when Send finishes
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.SendSpeed">
+<summary>
+ Set maximum sending speed for connection in bits per second
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.RecvQEnqueue">
+<summary>
+ The function to call to enqueue received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.OnSocketCloseState">
+<summary>
+ State to be passed in when OnSocketClose is called
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.OnSocketClose">
+<summary>
+ Optional argument - function to call upon socket closing
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.MaxTokenSize">
+<summary>
+ Set maximum number of tokens for connection 
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufSendRem">
+<summary>
+ If ProcessSendGenericConn is being used used for sender component processing
+ this specifies the remainder of the current buffer being processed and copied to a SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufSendOffset">
+<summary>
+ If ProcessSendGenericConn is being used used for sender component processing
+ this specifies the offset in the current buffer being processed and copied to a SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufSend">
+<summary>
+ If ProcessSendGenericConn is being used used for sender component processing
+ this specifies the current buffer being processed and copied to a SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecvRem">
+<summary>
+ If RecvDequeueGenericConn/x.ProcessRecvGenericConn are being used for component processing
+ this specifies the remaining size of the buffer being used to process and copy data from a received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecvOffset">
+<summary>
+ If RecvDequeueGenericConn/x.ProcessRecvGenericConn are being used for component processing
+ this specifies the offset within the buffer being to process and copy data from a received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecvMs">
+<summary>
+ If RecvDequeueGenericConn/x.ProcessRecvGenericConn are being used for component processing
+ this specifies the memorystream
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CurBufRecv">
+<summary>
+ this specifies the current buffer being used to process and copy data from a received SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.ConnKey">
+<summary>
+ A connection key to identify the connection
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CompSend">
+<summary>
+ The internal Component used for sending SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.CompRecv">
+<summary>
+ The internal Component used for receiving SocketAsyncEventArgs
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.GenericConn.AfterSendCallback">
+<summary>
+ Function to call when Send finishes
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.StartReceive">
+<summary>
+ Start receiving - starts the receiver threadpool which receives SocketAsyncEventArgs
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.SetTokenUse(System.Int64,System.Int64,System.Int32,System.Int64)">
+<summary>
+ Set token usage - Optional if you wish to implement control of sending rate
+ &lt;param name=&quot;initTokens&quot;&gt;The initial number of tokens&lt;/param&gt;
+ &lt;param name=&quot;maxTokens&quot;&gt;The maximum number of tokens&lt;/param&gt;
+ &lt;param name=&quot;initSendSpeed&quot;&gt;The sending speed in bits per second&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.RecvRelease(Microsoft.FSharp.Core.FSharpRef{Prajna.Tools.RBufPart{System.Byte}})">
+<summary>
+ Release SA being processed on receiver side
+ &lt;param name=&quot;rb&quot;&gt; The element to be released
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.RecvDequeueGenericConn(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.FSharpRef{Prajna.Tools.RBufPart{System.Byte}},System.Tuple{System.Boolean,System.Threading.ManualResetEvent}},Microsoft.FSharp.Core.FSharpRef{Prajna.Tools.RBufPart{System.Byte}})">
+<summary>
+ Generic function for recv dequeue to be used by users of GenericConn class
+ &lt;param name=&quot;dequeueAction&quot;&gt;The action used to dequeue a SocketAsyncEventArgs to process&lt;/param&gt;
+ &lt;param nam=&quot;e&quot;&gt;The SocketAsyncEventArg being processed&lt;/param&gt;
+ This function should be used by using following as example to set the component processors:
+ x.CompRecv.Dequeue &lt;- x.RecvDequeueGenericConn x.CompRecv.Dequeue
+ where &quot;x&quot; is an instance of the GenericConn class - that is only dequeueAction should be specified
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.ProcessSendGenericConn(Microsoft.FSharp.Core.FSharpFunc{Prajna.Tools.RBufPart{System.Byte},System.Tuple{System.Boolean,System.Threading.ManualResetEvent}},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Tuple{System.Boolean,System.Boolean}})">
+<summary>
+ A generic processor for copying buffers into SocketAsyncEventArgs for sending on network
+ &lt;param name=&quot;enqueueAction&quot;&gt;The action to enqueue the SocketAsyncEventArgs once it is assembled&lt;/param&gt;
+ &lt;param name=&quot;furtherProcess&quot;&gt;
+ The function to call once CurBufSendRem reaches zero.
+ This function should return (bDone, bForceEnqueue) as (bool, bool)
+ - bDone represents whether we are done proecssing the item to be sent
+ - bForceEnqueue represents whether we should force the current SocketAsyncEventArgs on the queue or whether we should try
+   to coalesce more data from the next item onto the same SocketAsyncEventArgs
+ &lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.ProcessRecvGenericConnMs(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Threading.ManualResetEvent},Prajna.Tools.RBufPart{System.Byte})">
+<summary>
+ Generic function for SocketAsyncEvent processing to be used by users of GenericConn class
+ &lt;param name=&quot;furtherProcess&quot;&gt;
+ A function to execute when CurBufRecvRem reaches zero
+ The function should return a ManualResetEvent - if it is non-null, processing cannot continue and receiving Component waits
+ In this implementation, thread pool is used for the receiver Component processing
+ &lt;/param&gt;    
+ &lt;param name=&quot;e&quot;&gt;The SocketAsyncEventArg being currently processed - not set by caller&lt;/param&gt;
+ An example of usage is the following:
+ x.CompRecv.Proc &lt;- x.ProcessRecvGenericConn ProcessRecvCommand
+ where &quot;x&quot; is an instance of GenericConn class and ProcessRecvCommand is function to perform further processing
+ once x.CurBufRecvRem reaches zero
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.ProcessRecvGenericConn(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Threading.ManualResetEvent},Prajna.Tools.RBufPart{System.Byte})">
+<summary>
+ Generic function for SocketAsyncEvent processing to be used by users of GenericConn class
+ &lt;param name=&quot;furtherProcess&quot;&gt;
+ A function to execute when CurBufRecvRem reaches zero
+ The function should return a ManualResetEvent - if it is non-null, processing cannot continue and receiving Component waits
+ In this implementation, thread pool is used for the receiver Component processing
+ &lt;/param&gt;    
+ &lt;param name=&quot;e&quot;&gt;The SocketAsyncEventArg being currently processed - not set by caller&lt;/param&gt;
+ An example of usage is the following:
+ x.CompRecv.Proc &lt;- x.ProcessRecvGenericConn ProcessRecvCommand
+ where &quot;x&quot; is an instance of GenericConn class and ProcessRecvCommand is function to perform further processing
+ once x.CurBufRecvRem reaches zero
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.InitSend">
+<summary>
+ Start sending - starts the seding threadpool which sends SocketAsyncEventArgs
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.InitConnectionAndStart(System.Net.Sockets.Socket,System.Object,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,Microsoft.FSharp.Core.Unit})">
+<summary>
+ Initialize and start connection - called if external code starting connection
+ &lt;param name=&quot;sock&quot;&gt;The socket to use&lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;The state representing the GenericNetwork&lt;/param&gt;
+ &lt;param name=&quot;start&quot;&gt;The code to execute upon start&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericConn.System-IDisposable-Dispose">
+<summary>
+ Releases all resources used by the current instance.
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.GenericConn">
+<summary>
+ A generic connection which processes SocketAsyncEventArgs
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericNetwork.System-IDisposable-Dispose">
+<summary>
+ Releases all resources used by the current instance.
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericNetwork.Close">
+<summary>
+ Close network connections
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericNetwork.#ctor(System.Int32,System.Int32,System.Boolean,Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.Sockets.SocketAsyncEventArgs,Microsoft.FSharp.Core.Unit}},Microsoft.FSharp.Core.FSharpOption{Microsoft.FSharp.Core.FSharpFunc{System.Net.Sockets.SocketAsyncEventArgs,Microsoft.FSharp.Core.Unit}})">
+<summary>
+ Allow specification of stackSize, buffer size, bStartSendPool upon construction
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericNetwork.#ctor(System.Boolean)">
+<summary>
+ Start with numNetThreads being default
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.GenericNetwork">
+<summary>
+ base class which maintains multiple GenericConn connections which
+ - share a common pool of SocketAsyncEventArgs which are processed by a superclass along with 
+ - share a threadpool for receiving and sending
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericVal`1.System-IDisposable-Dispose">
+<summary>
+ Releases all resources used by the current instance.
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericVal`1.AsyncSendValue(Microsoft.FSharp.Core.FSharpFunc{System.Object,Microsoft.FSharp.Core.Unit},System.Object,`0)">
+<summary>
+ Asynchronously start sending a value
+ &lt;param name=&quot;callback&quot;&gt;
+ A callback which executes after sending completes.
+ Passes in state (i.e. callback(state))
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;The state to be passed in the callback&lt;/param&gt;
+ &lt;param name=&quot;value&quot;&gt;The value to send&lt;/param&gt; 
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.GenericVal`1.AsyncRecvValue(Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Object,`0},Microsoft.FSharp.Core.Unit},System.Object)">
+<summary>
+ Asynchronously start receiving a value
+ &lt;param name=&quot;callback&quot;&gt;
+ A callback which executes after receive completes.
+ Passes in a state and the value retrieved (i.e. callback(state, value))
+ &lt;/param&gt;
+ &lt;param name=&quot;state&quot;&gt;
+ The state to be passed into the callback
+ &lt;/param&gt;
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.GenericVal`1">
+<summary>
+ A class capable of reading/writing value types asynchronously using an underlying connection
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.IConn.Socket(System.Net.Sockets.Socket)">
+<summary>
+ A socket for the connection
+</summary>
+</member>
+<member name="P:Prajna.Tools.Network.IConn.Socket">
+<summary>
+ A socket for the connection
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.IConn.Init(System.Net.Sockets.Socket,System.Object)">
+<summary>
+ Initialize the connection using (socket, state)
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.IConn.Close">
+<summary>
+ Close the connection
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.IConn">
+<summary>
+ A generic interface for a connection
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.Int64ToIPEndPoint(System.Int64)">
+<summary>
+ Convert a 48bit signature of type int64 back to an IPv4 endpoint, with port being the lowest 16 bit, and IPv4 address takes 17 to 48 bit. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.IPv4AddrToInt64(System.Net.IPAddress,System.Int32)">
+<summary>
+ Map an IPv4 address to a 48bit signature of type int64, with port being the lowest 16 bit, and IPv4 address takes 17 to 48 bit. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.IPEndPointToInt64(System.Net.IPEndPoint)">
+<summary>
+ Map an IPv4 endpoint to a 48bit signature of type int64, with port being the lowest 16 bit, and IPv4 address takes 17 to 48 bit. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.GetShowInfo(System.Net.EndPoint)">
+<summary>
+ Show host information of an endpoint ep. If the hostname is not in DNS cache, IP address and port information is shown. 
+ &lt;param name=&quot;ep&quot;&gt;The endpoint&lt;/param&gt;
+ &lt;returns&gt;A string for display purposes&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.GetNameForIPAddress(System.Net.IPAddress)">
+<summary>
+ Attempt to retrieve the hostname for IPAddress addr. If the DNS entry does not exist, the function returns IP addresses information string as x.x.x.x 
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.GetHostInfoInt64(System.Int64)">
+<summary>
+ Attempt to retrieve the hostname of a 48bit signature of type int64, with port being the lowest 16 bit, and IPv4 address takes 17 to 48 bit. 
+ If the DNS entry doesn&apos;t exist in cache, the hostname information is shown as x.x.x.x
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.GetHostByAddress(System.Byte[],Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
+<summary>
+ Similar to Dns.GetHostEntry, but cache its result. 
+ &lt;param name=&quot;addr&quot;&gt;The ipaddress as array of bytes&lt;/param&gt;
+ &lt;param name=&quot;bTryResolve&quot;&gt;
+ Optional argument (default is true).
+ Also, if bTryResolve is false, the function only attemps to retrieve the DNS entry in cache. 
+ If bTryResolve is false and the DNS entry doesn&apos;t exist, null is returned for hostname. 
+ &lt;/param&gt;
+ &lt;returns&gt;A string representing the host address&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.GetHostAddresses(System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
+<summary>
+ Similar to Dns.GetHostAddresses, but only use IPv4 addresses, and caches its result.\
+ &lt;param name=&quot;hostname&quot;&gt;The hostname to resolve&lt;/param&gt;
+ &lt;param name=&quot;bTryResolve&quot;&gt;
+ Optional argument (default is true).
+ Also, if bTryResolve is false, the function only attemps to retrieve the DNS entry in cache. 
+ If bTryResolve is false and the DNS entry doesn&apos;t exist, null is returned for addresses.
+ &lt;/param&gt;
+ &lt;returns&gt;An array of host addresses, where each address is array of bytes&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.GetAnyIPAddress(System.String,Microsoft.FSharp.Core.FSharpOption{System.Boolean})">
+<summary>
+ Return a random IPv4 address of hostname. 
+ &lt;param name=&quot;hostname&quot;&gt;The hostname&lt;/param&gt;
+ &lt;param name=&quot;bTryResolve&quot;&gt;
+ Optional argument - default is true
+ If bTryResolve is false, the function only attemps to retrieve the DNS entry in cache. 
+ If bTryResolve is false and the DNS entry doesn&apos;t exist, null is returned for addresses. 
+ &lt;/param&gt;
+ &lt;returns&gt;A random IPv4 address of the hostname&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.EndDNSResolve(System.IAsyncResult)">
+<summary>
+ End resolve DNS
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.BeginDNSResolve(System.String,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{System.Net.IPAddress,System.Boolean,System.Object},Microsoft.FSharp.Core.Unit},System.Object)">
+<summary>
+ Begin To resolve DNS
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.LocalDNS.AddEntry(System.String,System.Byte[][])">
+<summary>
+ Add a DNS entry of hostname &lt;-&gt; ipAddresses
+ &lt;param name=&quot;hostname&quot;&gt;The hostname to add to the cache&lt;/param&gt;
+ &lt;param name=&quot;ipAddresses&quot;&gt;The IP addresses corresponding to the hostname being added&lt;/param&gt;
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.LocalDNS">
+ <summary> 
+ DNS helper functions. Cannot instantiate class, only contains static members.
+ </summary>
+</member>
+<member name="M:Prajna.Tools.Network.NetUtils.ParseAddrPort(System.String)">
+<summary>
+ Parse a string into (address, port)
+ &lt;param name=&quot;addrport&quot;&gt;The string represting address and port&lt;/param&gt;
+ &lt;returns&gt;A tuple of (string, int) representing the address and port&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.NetUtils.GetTCPListener(Microsoft.FSharp.Core.FSharpOption{System.Int32})">
+<summary>
+ Get a TCP Listener which listens on a port
+ &lt;param name=&quot;startPort&quot;&gt;
+ Optional argument - default random port between 30000 and 65535
+ the first port which the listener tries
+ &lt;/param&gt;
+ &lt;returns&gt;
+ A tuple of (listener, randomPort)
+ listener - the TCPListener
+ randomPort - the port on which it is listening
+ &lt;/returns&gt;
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.NetUtils">
+<summary>
+ Abstract Class with static members for network utility functions
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Network.StopListen">
+<summary>
+ Stop listening for incoming connections
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Network.System-IDisposable-Dispose">
+<summary>
+ Releases all resources used by the current instance.
+</summary>
+</member>
+<member name="M:Prajna.Tools.Network.Network.CloseConns">
+<summary>
+ Close all network connections held by Network
+</summary>
+</member>
+<member name="T:Prajna.Tools.Network.Network">
+<summary>
+ maintains multiple network connections
+</summary>
+</member>
+<member name="M:Prajna.Tools.PerfADateTime.UtcNowTicks">
+<summary>
+ Equivalent to DateTime.UtcNow.Ticks, but with a higher resolution clock. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.PerfADateTime.UtcNow">
+<summary>
+ Equivalent to DateTime.UtcNow, but with a higher resolution clock. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.PerfADateTime">
+ <summary>
+ PerfADateTime is to used anyplace when you need to time the performance of code. DateTime.UtcNow and DateTime.UtcNow.Ticks doesn't have
+ good resolution, and sometime may cause a measurement error.  PerfADateTime use Stopwatch to provide accurate ticks and DateTime.UtcNow
+ for measurement. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.PerfDateTime.UtcNowTicks">
+ <summary> DateTime.UtcNow.Ticks, used for purpose of possible change to a higher resolution clock if need.  </summary>
+</member>
+<member name="M:Prajna.Tools.PerfDateTime.UtcNow">
+ <summary> DateTime.UtcNow, used for purpose of possible change to a higher resolution clock if need.  </summary>
+</member>
+<member name="T:Prajna.Tools.PerfDateTime">
+ <summary>
+ PerfADateTime maps to DateTime (for UtcNow and UtcNowTicks). 
+ </summary>
+</member>
+<member name="P:Prajna.Tools.Queue.BaseQ`1.IsEmpty">
+<summary>
+ Return if queue is empty or not
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.BaseQ`1.Count">
+<summary>
+ Returns count of number of elements in queue
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.EnqueueWaitTime(`0)">
+ <summary>
+ Abstract member to enqueue without blocking calling thread.
+ Enqueue will wait for upto WaitTimeEnqueueMs milliseconds synchronously if needed.
+ If enqueue not sucessful returns an event which the caller can wait upon before trying again.
+ Enqueue is not successful if queue is full.
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where event is null upon success,
+ otherwise it is a ManualResetEvent which the caller can wait upon
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.EnqueueWait(`0)">
+ <summary>
+ Abstract member to enqueue without blocking calling thread.
+ If enqueue not sucessful returns an event which the caller can wait upon before trying again.
+ Enqueue is not successful if queue is full.
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where event is null upon success,
+ otherwise it is a ManualResetEvent which the caller can wait upon
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.EnqueueSync(`0)">
+ <summary> 
+ Abstract member to enqueue synchronously - calling thread blocked until enqueue succeeds
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>Tuple of (success, event) where success is always true and event is null</returns>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.DequeueWaitTime(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Abstract member to dequeue without blocking caller for long time.
+ Function will block up to WaitTimeDequeueMs prior to returning.
+ </summary>
+ <param name="item">A reference to location where retrieved item is stored</param>
+ <returns>
+ Tuple of (success, event)
+ If success is true, event will be null.
+ If success is false, event will either be null or will be a ManualResetEvent for which the caller
+ can wait upon prior to calling again.
+ Even after this wait, there is no guarantee object will be returned upon next call.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.DequeueWait(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Abstract member to dequeue without blocking caller.  If queue is empty automatically returns.
+ </summary>
+ <param name="item">A reference to location where retrieved item is stored</param>
+ <returns>
+ Tuple of (success, event)
+ If success is true, event will be null.
+ If success is false, event will either be null or will be a ManualResetEvent for which the caller
+ can wait upon prior to calling again.
+ Even after this wait, there is no guarantee object will be returned upon next call.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.DequeueSync(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Abstract member to dequeue synchronously, caller will be blocked while function waits for queue to fill.
+ Even after waiting, dequeue may not return anything in case another thread retrieves item.
+ </summary>
+ <param name="item">A reference to location where retrieved item is stored</param>
+ <returns>
+ Tuple of (success, event)
+ If success is true, event will be null.
+ If success is false, event will either be null or will be a ManualResetEvent for which the caller
+ can wait upon prior to calling again.
+ Even after this wait, there is no guarantee object will be returned upon next call.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.BaseQ`1.Clear">
+<summary>
+ Function to clear out the queue
+</summary>
+</member>
+<member name="T:Prajna.Tools.Queue.BaseQ`1">
+<summary>
+ The base class for various concurrent queue structures with and without flow control logic
+ all enqueue/dequeue methods return (success, waithandle) in all classes
+ 1. GrowQ: No limit on queue growth
+ 2. FixedLenQ: Growth limited by queue length
+ 3. FixedSizeQ: Growth limited by queue &quot;size&quot;, where &quot;size&quot; is sum of all element sizes
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.BlockingQueue`1.Enqueue(`0)">
+<summary>
+ Enqueue an object
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.BlockingQueue`1.Dequeue">
+<summary>
+ Dequeue an object
+</summary>
+</member>
+<member name="T:Prajna.Tools.Queue.BlockingQueue`1">
+<summary>
+ The base class for a concurrent queue structures with and without flow control logic and 
+ with support of cancellation. 
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedLenQ`1.MaxLen(System.Int32)">
+<summary>
+ The maximum length of the queue as a count
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedLenQ`1.DesiredLen(System.Int32)">
+<summary>
+ The desired length of the quueu (once queue is full, it must go below this for more items to enter)
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedLenQ`1.MaxLen">
+<summary>
+ The maximum length of the queue as a count
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedLenQ`1.DesiredLen">
+<summary>
+ The desired length of the quueu (once queue is full, it must go below this for more items to enter)
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedLenQ`1.EnqueueWaitTime(`0)">
+ <summary> 
+ Enqueue an item. 
+ Queue grows to max len, if it exceeds then it waits for some duration of time and then returns wait handle if wait does not succeed.
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedLenQ`1.EnqueueWait(`0)">
+ <summary> 
+ Enqueue an item. Queue grows to max len, if it exceeds then it returns a wait handle
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedLenQ`1.EnqueueSync(`0)">
+ <summary> 
+ Enqueue an item, wait for space. Queue grows to max len, if it exceeds then it synchronously waits on same thread
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where success is always true and event is null
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedLenQ`1.DequeueWaitTime(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, return wait for full event after waiting for WaitTimeDequeueMs milliseconds.
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedLenQ`1.DequeueWait(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, return wait for full event.
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedLenQ`1.DequeueSync(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, wait for full event (still no guarantee to succeed)
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="T:Prajna.Tools.Queue.FixedLenQ`1">
+<summary>
+ A queue which limits queue growth up to a maximum number of elements.
+ The actual length of the queue may be slightly larger than max length if multiple threads are enqueuing, since queue.Count is used
+</summary>
+</member>
+<member name="T:Prajna.Tools.Queue.FixedSizeMinSizeQ`1">
+<summary>
+ A queue which limit queue growth by size, but also allows for minimum size before it is declared to have items to process
+ A timer is also provided for preventing an indefinite wait through the variable maxQWaitTime
+</summary>
+</member>
+<member name="F:Prajna.Tools.Queue.FixedSizeQ`1.IsFullDesiredCond@">
+<summary>
+ An arbitrary function for testing fullness for declaring queue is &quot;empty&quot;
+</summary>
+</member>
+<member name="F:Prajna.Tools.Queue.FixedSizeQ`1.IsFullMaxCond@">
+<summary>
+ An arbitrary function for testing fullness for declaring queue is &quot;full&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.MaxSize(System.Int64)">
+<summary>
+ The maximum size of the queue - threshold for declaring queue is &quot;full&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.IsFullMaxCond(Microsoft.FSharp.Core.FSharpFunc{System.Int64,Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Boolean}})">
+<summary>
+ An arbitrary function for testing fullness for declaring queue is &quot;full&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.IsFullDesiredCond(Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Boolean})">
+<summary>
+ An arbitrary function for testing fullness for declaring queue is &quot;empty&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.DesiredSize(System.Int64)">
+<summary>
+ The desired size of the queue - threshold for declaring queue is &quot;empty&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.MaxSize">
+<summary>
+ The maximum size of the queue - threshold for declaring queue is &quot;full&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.IsFullMaxCond">
+<summary>
+ An arbitrary function for testing fullness for declaring queue is &quot;full&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.IsFullDesiredCond">
+<summary>
+ An arbitrary function for testing fullness for declaring queue is &quot;empty&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.DesiredSize">
+<summary>
+ The desired size of the queue - threshold for declaring queue is &quot;empty&quot;
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.CurrentSizeRef">
+<summary>
+ The current size ref
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.FixedSizeQ`1.CurrentSize">
+<summary>
+ The current size of the queue
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.EnqueueWaitTimeSize(`0,System.Int64)">
+ <summary> 
+ Enqueue an item. 
+ Queue grows to max size (using size as count), if it exceeds then it waits for some duration of time and returns wait handle
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <param name="size">Size of item being queued</param>
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.EnqueueWaitTimeFullMaxCond(`0,System.Int64)">
+ <summary> 
+ Enqueue an item. 
+ Queue grows to max size (using size as count), if it exceeds then it waits for some duration of time and returns wait handle
+ Generic condition for testing of "full" utilizing member IsFullMaxCond which caller can set to arbitrary function
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <param name="size">Size of item being queued</param>
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.EnqueueWaitTimeCond(`0,System.Int64,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{Prajna.Tools.Queue.FixedSizeQ{`0},System.Int64},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Boolean}})">
+ <summary> 
+ Enqueue an item. 
+ Queue grows to max size (using size as count), if it exceeds then it waits for some duration of time and returns wait handle
+ Generic condition for testing of "full"
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <param name="size">Size of item being queued</param>
+ <param name="cond">Condition for testing if full</param>
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.EnqueueWaitSize(`0,System.Int64)">
+ <summary> 
+ Enqueue an item.
+ Queue grows to max size (using size as count), if it exceeds then it returns a wait handle
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <param name="size">Size of item being queued</param>
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.EnqueueSyncSize``1(`0,System.Int64)">
+ <summary> 
+ Enqueue an item, wait for space. 
+ Queue grows to max size (using size as count), if it exceeds then it synchronously waits on same thread
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <param name="size">Size of item being queued</param>
+ <returns>
+ Tuple of (success, event) where success is always true and event is null
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.EnqueuSyncCond``1(`0,System.Int64,Microsoft.FSharp.Core.FSharpFunc{System.Tuple{Prajna.Tools.Queue.FixedSizeQ{`0},System.Int64},Microsoft.FSharp.Core.FSharpFunc{Microsoft.FSharp.Core.Unit,System.Boolean}})">
+ <summary> 
+ Enqueue an item. 
+ Queue grows to max size (using size as count), if it exceeds then it waits for some duration of time and returns wait handle
+ Generic condition for testing of "full"
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <param name="size">Size of item being queued</param>
+ <param name="cond">Condition for testing if full</param>
+ <returns>
+ Tuple of (success, event) where if success is false, an event is returned which the caller can wait upon.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueWaitTimeSize(Microsoft.FSharp.Core.FSharpRef{`0},System.Int64)">
+ <summary>
+ Try dequeue, return wait for full event after waiting for WaitTimeDequeueMs milliseconds.
+ Not so useful since "size" often unknown until dequeue succeeds, but add for completeness
+ Better to simply use DequeueSync followed by call to DequeueSize which will reduce queue size
+ </summary>
+ <param name="result">Item retrieved</param>
+ <param name="size">Size of item being retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueWaitTime(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, return wait for full event after waiting for WaitTimeDequeueMs milliseconds.
+ A separate call to dequeue the size is needed
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueWaitSize(Microsoft.FSharp.Core.FSharpRef{`0},System.Int64)">
+ <summary>
+ Try dequeue, return wait for full event.
+ Not so useful since "size" often unknown until dequeue succeeds, but add for completeness
+ Better to simply use DequeueSync followed by call to DequeueSize which will reduce queue size
+ </summary>
+ <param name="result">Item retrieved</param>
+ <param name="size">Size of item being retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueWait(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, return wait for full event.
+ A separate call to dequeue the size is needed
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueSyncSize(Microsoft.FSharp.Core.FSharpRef{`0},System.Int64)">
+ <summary>
+ Try dequeue, wait for full event (still no guarantee to succeed)
+ Not so useful since "size" often unknown until dequeue succeeds, but add for completeness
+ Better to simply use DequeueSync followed by call to DequeueSize which will reduce queue size
+ </summary>
+ <param name="result">Item retrieved</param>
+ <param name="size">Size of item being retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueSync(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, wait for full event (still no guarantee to succeed)
+ A separate call to dequeue the size is needed
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueSizeFullDesiredCond(System.Int64)">
+ <summary>
+ Decrement queue size after item has been retrieved and set empty condition on queue if needed.
+ Allow generic fullness condition check IsFullDesiredCond function to be used (which caller can set).
+ </summary>
+ <param name="size">Size of item which was retrieved</param>
+</member>
+<member name="M:Prajna.Tools.Queue.FixedSizeQ`1.DequeueSize(System.Int64)">
+ <summary>
+ Decrement queue size after item has been retrieved and set empty condition on queue if needed.
+ </summary>
+ <param name="size">Size of item which was retrieved</param>
+</member>
+<member name="T:Prajna.Tools.Queue.FixedSizeQ`1">
+<summary>
+ A queue which limits queue growth up to a maximum size
+ Actual size may be larger, and condition violated if multiple threads enqueue.
+ This can be fixed if desired by utilizing Interlocked.Add prior to and after conditional check
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.GrowQ`1.Q">
+<summary>
+ The internal concurrent queue used to hold data
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.GrowQ`1.IsEmpty">
+<summary>
+ Returns if queue is empty or not
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.GrowQ`1.Count">
+<summary>
+ Count of number of elements
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.EnqueueWaitTime(`0)">
+ <summary> 
+ Enqueue an item, return (false, event) if no space after waiting up to WaitTimeEnqueueMs
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where success is always true and event is null
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.EnqueueWait(`0)">
+ <summary> 
+ Enqueue an item, return (false, event) if no space.  However since queue can grow, no need to wait.
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where success is always true and event is null
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.EnqueueSync(`0)">
+ <summary> 
+ Enqueue an item, wait for space. However since queue can grow, no need to wait.
+ </summary>
+ <param name="item">Item to be inserted into queue</param> 
+ <returns>
+ Tuple of (success, event) where success is always true and event is null
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.DequeueWaitTime(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, return wait for full event after waiting for WaitTimeDequeueMs milliseconds.
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.DequeueWait(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, return wait for full event.
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.DequeueSync(Microsoft.FSharp.Core.FSharpRef{`0})">
+ <summary>
+ Try dequeue, wait for full event (still no guarantee to succeed)
+ </summary>
+ <param name="result">Item retrieved</param>
+ <returns>
+ Tuple of (success, event), where if success is false, an event may be returned.
+ If so, caller can wait on event prior to calling again.
+ </returns>
+</member>
+<member name="M:Prajna.Tools.Queue.GrowQ`1.Clear">
+<summary>
+ Clear the queue of all elements
+</summary>
+</member>
+<member name="T:Prajna.Tools.Queue.GrowQ`1">
+<summary>
+ A queue derived from BaseQ with no limits on queue growth
+</summary>
+</member>
+<member name="F:Prajna.Tools.Queue.SharedStack`1.MaxStackSize@">
+<summary>
+ The maximum stack size as count of number of elements
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.SharedStack`1.MaxStackSize(System.Int32)">
+<summary>
+ The maximum stack size as count of number of elements
+</summary>
+</member>
+<member name="P:Prajna.Tools.Queue.SharedStack`1.MaxStackSize">
+<summary>
+ The maximum stack size as count of number of elements
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.SharedStack`1.ReleaseElem(`0)">
+<summary>
+ Release element back to stack
+ &lt;param name=&quot;elem&quot;&gt;The element to return to the stack&lt;/param&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.SharedStack`1.GetElem">
+<summary>
+ Get element from stack
+ &lt;returns&gt;
+ A tuple of (event, elem)
+ event: An event which caller can wait upon in case stack has no more elements and cannot grow
+ elem: An element from the stack
+ &lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.SharedStack`1.GetElem(`0@)">
+<summary>
+ Get element from stack
+ &lt;param name=&quot;elem&quot;&gt;The location of where to store retrieved element&lt;/param&gt;
+ &lt;returns&gt;An event which caller can wait upon in case stack has no more elements and cannot grow&lt;/returns&gt;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Queue.SharedStack`1.ExpandStack(System.Int32)">
+<summary>
+ Expand stack to 150% of current size
+</summary>
+</member>
+<member name="T:Prajna.Tools.Queue.SharedStack`1">
+<summary>
+ Shared stack of memory (for example to share across network connections)
+ Use stack so same buffer gets used with higher frequency (e.g. to improve caching)
+</summary>
+</member>
+<member name="P:Prajna.Tools.Runtime.RunningOnMono">
+<summary>
+ Boolean variable to test if the code is running on mono. 
+</summary>
+</member>
+<member name="T:Prajna.Tools.Runtime">
+<summary>
+ Runtime related information
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.VersionFromString(System.String)">
+ <summary>
+ Parse a string of standard datetime format in Prajna
+ </summary>  
+</member>
+<member name="M:Prajna.Tools.StringTools.UtcNowToString">
+ <summary>
+ Current timestamp in standard Prajna format. 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.VersionToString(System.DateTime)">
+ <summary>
+ Standard datetime format in Prajna
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.HashStringToGuid(System.String)">
+ <summary>
+ Hash a string via SHA256 hash, and then use the first 16B of hash to form a GUID 
+ </summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.BuildExts(System.String[])">
+<summary>
+ Formulate a default set of file extension for pattern matching.
+ Special Prefix F#, FSharp, C#, csharp, C++, 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.SubDirectories(System.String)">
+<summary>
+ Find all directories of a sub directories 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.ConcatWDelim(System.Char,System.String[])">
+<summary>
+ Concatenate string[] to string with deliminator in between. 
+ ToDo: use String.concat
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.BuildWebName(System.String,System.String)">
+<summary>
+ concatenate web URL and subsequent subdirectory, add / if necessary. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.BuildFName(System.String,System.String)">
+<summary>
+ Similar to Path.Combine, concatenate directory and filename, add \ if necessary. 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.|Prefixi|_|(System.String,System.String)">
+<summary>
+ Case insensitive prefix match, if s:string starts with p:string, return Some ( rest of s:string ), otherwise, return None
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.|Prefix|_|(System.String,System.String)">
+<summary>
+ If s:string starts with p:string, return Some ( rest of s:string ), otherwise, return None
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.Prefixi(System.String,System.String)">
+<summary>
+ Case insensitive prefix match, if s:string starts with p:string, return Some ( rest of s:string ), otherwise, return None
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.Prefix(System.String,System.String)">
+<summary>
+ If s:string starts with p:string, return Some ( rest of s:string ), otherwise, return None
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.ReplaceString(System.String,System.String,System.String,System.StringComparison)">
+<summary>
+ String.Replace, but take a comparison 
+</summary>
+</member>
+<member name="M:Prajna.Tools.StringTools.IsNullOrEmpty(System.String)">
+ <summary> 
+ Equivalent to String.IsNullOrEmpty, but our implementation is more efficient for the comparison to null. 
+     code in http://referencesource.microsoft.com/#mscorlib/system/string.cs,23a8597f842071f4 is follows. 
+     public static bool IsNullOrEmpty(String value) {
+         return (value = null || value.Length == 0);
+     }
+ </summary> 
+</member>
+<member name="T:Prajna.Tools.StringTools">
+ <summary>
+ A set of helper routine for string operations
+ </summary>
+</member>
+<member name="M:Prajna.Tools.Utils.GetHashCode``1(``0)">
+<summary>
+ Returns hash code for &apos;v&apos;
+</summary>
+</member>
+<member name="M:Prajna.Tools.Utils.IsNotNull``1(``0)">
+<summary>
+ Returns true if &apos;value&apos; is not null
+</summary>
+</member>
+<member name="M:Prajna.Tools.Utils.IsNull``1(``0)">
+<summary>
+ Returns true if &apos;value&apos; is null
+</summary>
+</member>
+<member name="T:Prajna.Tools.Utils">
+<summary>
+ Utilities
+</summary>
+</member>
+</members>
+</doc>
